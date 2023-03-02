@@ -6,6 +6,20 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	  <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCRgEIkz7-X52c3e3f4TgqMEBAMF8J6paA",
+  authDomain: "probe-web.firebaseapp.com",
+  projectId: "probe-web",
+  storageBucket: "probe-web.appspot.com",
+  messagingSenderId: "12639340602",
+  appId: "1:12639340602:web:8895af48f5ac447da90d03"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
         <h1>
             Firebase CRUD with Vanilla Javascript
             <br />
@@ -29,8 +43,9 @@
             </p>
         </div>
         <!-- firebase sdk link goes here -->
-		<script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script>
+		<!--<script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-auth-compat.js"></script>
         <script type="text/javascript" src="app.js"></script>
+		-->
     </body>
 </html>
