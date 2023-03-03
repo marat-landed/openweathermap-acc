@@ -37,7 +37,7 @@
 		
 		console.log("Probe 18");
 		
-		firebase.database().ref('object-key').once('value').then(function(snapshot) { 
+		firebase.database().ref('/object-key').once('value').then(function(snapshot) { 
                     var userdata = (snapshot.val());
                     if (userdata != null) {
                        //dataarray = [data,userdata]
@@ -48,7 +48,11 @@
 					}
                   });
 				  
-				  
+		// firebase.database().ref('users/' + userId).set({
+                    //username: name,
+                    //email: email,
+                    //profile_picture : imageUrl
+                //}); 		  
 	  
     </script>
         <h1>
@@ -58,7 +62,7 @@
                 <em>01 Read Data</em>
             </small>
         </h1>
-		<div>Version 17</div>
+		<div>Version 18</div>
         <ul id="userList"></ul>
         <div id="userDetail">
             <p>
