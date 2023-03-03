@@ -10,25 +10,25 @@
 	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 	  <script>
       var firebaseConfig = {
-        apiKey: "AIzaSyCRgEIkz7-X52c3e3f4TgqMEBAMF8J6paA",
-  authDomain: "probe-web.firebaseapp.com",
-  //https://probe-web-default-rtdb.europe-west1.firebasedatabase.app 
-  //(https://probe-web-default-rtdb.firebaseio.com/)
-  projectId: "probe-web",
-  storageBucket: "probe-web.appspot.com",
-  messagingSenderId: "12639340602",
-  appId: "1:12639340602:web:8895af48f5ac447da90d03",
-  databaseURL: "https://probe-web-default-rtdb.europe-west1.firebasedatabase.app"
+		apiKey: "AIzaSyCRgEIkz7-X52c3e3f4TgqMEBAMF8J6paA",
+		authDomain: "probe-web.firebaseapp.com",
+		//https://probe-web-default-rtdb.europe-west1.firebasedatabase.app 
+		//(https://probe-web-default-rtdb.firebaseio.com/)
+		projectId: "probe-web",
+		storageBucket: "probe-web.appspot.com",
+		messagingSenderId: "12639340602",
+		appId: "1:12639340602:web:8895af48f5ac447da90d03",
+		databaseURL: "https://probe-web-default-rtdb.europe-west1.firebasedatabase.app"
       };
 	  
 	  function writeUserData(userId, name) {
-  const db = firebase.database();
-  firebase.set(firebase.ref(db, 'users1/' + userId), {
-    username: name,
-  });
-}
+		const db = firebase.database();
+		firebase.set(firebase.ref(db, 'users1/' + userId), {
+		  username: name,
+		 });
+	  }
 
-	//writeUserData(1, "jacob");
+	  writeUserData(1, "jacob");
 
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
@@ -36,68 +36,42 @@
 	  var newPostKey = firebase.database().ref().child('posts').push().key;
 	  
 	  const dbRefObject = firebase.database().ref().child('/object-key');
-		dbRefObject.on('value', snap => console.log(snap.val()));
-		
-		console.log("Probe 23");
-		
-		firebase.database().ref('/object-key').once('value').then(function(snapshot) { 
-                    var userdata = (snapshot.val());
-                    if (userdata != null) {
-                       //dataarray = [data,userdata]
-                       console.log(userdata)
-                       //updatetweets(dataarray); 
-                    } else {
-					  console.log("userdata = null")
-					}
-                  });
+	  dbRefObject.on('value', snap => console.log(snap.val()));
+	  console.log("Probe 24");
+	  firebase.database().ref('/object-key').once('value').then(function(snapshot) { 
+        var userdata = (snapshot.val());
+        if (userdata != null) {
+          //dataarray = [data,userdata]
+          console.log(userdata)
+          //updatetweets(dataarray); 
+        } else {
+		  console.log("userdata = null")
+		}
+      });
 				  
 		// firebase.database().ref('users/' + userId).set({
                     //username: name,
                     //email: email,
                     //profile_picture : imageUrl
                 //}); 
-    console.log("Probe 23-1");	
+      console.log("Probe 24-1");	
 
-var ref = firebase.database().ref().child('object-key');
-
-    ref.on('value', function(snap) {
-   document.getElementById("answer").innerHTML = snap.val();
-    });	
+	  var ref = firebase.database().ref().child('object-key');
+      ref.on('value', function(snap) {
+		document.getElementById("answer").innerHTML = snap.val();
+	  });	
 	  
     </script>
-        <h1>
-            Firebase CRUD with Vanilla Javascript
-            <br />
-            <small>
-                <em>01 Read Data</em>
-            </small>
-        </h1>
+      <h1>
+        Firebase CRUD with Vanilla Javascript
+        <br />
+        <small>
+          <em>01 Read Data</em>
+        </small>
+		Changing Message
+      </h1>
+      <h2 id='answer'></h2>
 		
-		<h1>Changing Message</h1>
-    <h2 id='answer'></h2>
-		
-		<div>Version 23</div>
-        <ul id="userList"></ul>
-        <div id="userDetail">
-            <p>
-                Name :
-                <strong class="detailName"></strong>
-            </p>
-            <p>
-                Age:
-                <strong class="detailAge"></strong>
-            </p>
-            <p>
-                Email:
-                <strong class="detailEmail"></strong>
-            </p>
-        </div>
-		</br>
-		
-        <!-- firebase sdk link goes here -->
-		<!--<script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-auth-compat.js"></script>
-        <script type="text/javascript" src="app.js"></script>
-		-->
+	  <div>Version 23</div>
     </body>
 </html>
