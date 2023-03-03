@@ -35,6 +35,8 @@
 	  const dbRefObject = firebase.database().ref().child('object-key');
 		dbRefObject.on('value', snap => console.log(snap.val()));
 		
+		console.log("Probe 18");
+		
 		firebase.database().ref('object-key').once('value').then(function(snapshot) { 
                     var userdata = (snapshot.val());
                     if (userdata != null) {
