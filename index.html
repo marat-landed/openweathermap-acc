@@ -26,7 +26,7 @@
 	  const dbRefObject = firebase.database().ref().child('object-key');
 		dbRefObject.on('value', snap => console.log(snap.val()));
 		
-		firebase.database().ref('/object-key').once('value').then(function(snapshot) { 
+		firebase.database().ref('object-key').once('value').then(function(snapshot) { 
                     var userdata = (snapshot.val());
                     if (userdata != null) {
                        //dataarray = [data,userdata]
@@ -43,7 +43,7 @@
                 <em>01 Read Data</em>
             </small>
         </h1>
-		<div>Version 13</div>
+		<div>Version 14</div>
         <ul id="userList"></ul>
         <div id="userDetail">
             <p>
