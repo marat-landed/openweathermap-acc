@@ -25,7 +25,7 @@
   });
 }
 
-	writeUserData(1, "jacob");
+	//writeUserData(1, "jacob");
 
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
@@ -41,7 +41,9 @@
                        //dataarray = [data,userdata]
                        console.log(userdata)
                        //updatetweets(dataarray); 
-                    }
+                    } else {
+					  console.log("userdata = null")
+					}
                   });
 				  
 				  
@@ -54,7 +56,7 @@
                 <em>01 Read Data</em>
             </small>
         </h1>
-		<div>Version 16</div>
+		<div>Version 17</div>
         <ul id="userList"></ul>
         <div id="userDetail">
             <p>
