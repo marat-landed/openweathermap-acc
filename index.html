@@ -17,6 +17,15 @@
   messagingSenderId: "12639340602",
   appId: "1:12639340602:web:8895af48f5ac447da90d03"
       };
+	  
+	  function writeUserData(userId, name) {
+  const db = firebase.getDatabase();
+  firebase.set(firebase.ref(db, 'users1/' + userId), {
+    username: name,
+  });
+}
+
+	writeUserData(1, "jacob");
 
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
@@ -34,6 +43,8 @@
                        //updatetweets(dataarray); 
                     }
                   });
+				  
+				  
 	  
     </script>
         <h1>
@@ -43,7 +54,7 @@
                 <em>01 Read Data</em>
             </small>
         </h1>
-		<div>Version 14</div>
+		<div>Version 15</div>
         <ul id="userList"></ul>
         <div id="userDetail">
             <p>
