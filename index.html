@@ -19,6 +19,10 @@
 
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+	  
+	  const dbRefObject = firebase.database().ref().child('object-key');
+		dbRefObject.on('value', snap => console.log(snap.val()));
+	  
     </script>
         <h1>
             Firebase CRUD with Vanilla Javascript
