@@ -25,6 +25,15 @@
 	  
 	  const dbRefObject = firebase.database().ref().child('object-key');
 		dbRefObject.on('value', snap => console.log(snap.val()));
+		
+		firebase.database().ref('/object-key').once('value').then(function(snapshot) { 
+                    var userdata = (snapshot.val());
+                    if (userdata != null) {
+                       //dataarray = [data,userdata]
+                       console.log(userdata)
+                       //updatetweets(dataarray); 
+                    }
+                  });
 	  
     </script>
         <h1>
@@ -34,7 +43,7 @@
                 <em>01 Read Data</em>
             </small>
         </h1>
-		<div>Version 12</div>
+		<div>Version 13</div>
         <ul id="userList"></ul>
         <div id="userDetail">
             <p>
