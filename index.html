@@ -20,6 +20,8 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 	  
+	  var newPostKey = firebase.database().ref().child('posts').push().key;
+	  
 	  const dbRefObject = firebase.database().ref().child('object-key');
 		dbRefObject.on('value', snap => console.log(snap.val()));
 	  
