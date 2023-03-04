@@ -41,7 +41,14 @@
 		  return snapshot.val();
 		} else ;
 	  });
-	  forecast.then(console.log); // .then((value) => console.log(value))
+	  //forecast.then(console.log); // .then((value) => console.log(value))
+	  var humidity;
+	  forecast.then((value) => {
+	    humidity = value;
+	    console.log(humidity);
+	  }); // .then((value) => console.log(value))
+	  console.log(humidity.length);
+	  console.log(humidity[humidity.length]);
 	  
 	  async function getHumidityLastForecast(path) {
 		const dbRef = firebase.database().ref(path);
@@ -52,7 +59,7 @@
 	    });
 	    return forecast;
 	  }
-	  getHumidityLastForecast("forecast/humidity/0").then((value) => console.log(value));
+	  //getHumidityLastForecast("forecast/humidity/0").then((value) => console.log(value));
 	  
 	  var res = true;
 	  for (var i=0; i<8; i++) {
