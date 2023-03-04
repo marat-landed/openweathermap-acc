@@ -43,16 +43,19 @@
 	  });
 	  //forecast.then(console.log); // .then((value) => console.log(value))
 	  forecast.then((value) => {
-	    console.log(value); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
-		console.log(typeof value); // object
-		console.log(Object.keys(value)); // Array(3) [ "0", "1", "2" ] Ключи
-	    console.log(value.length); // 3
+	    //console.log(value); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
+		//console.log(typeof value); // object
+		//console.log(Object.keys(value)); // Array(3) [ "0", "1", "2" ] Ключи
+	    //console.log(value.length); // 3
+		// Последний прогноз
+		console.log("Последний прогноз");
 	    console.log(value[value.length-1]); // 1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00
-		var propertyValues = Object.values(value);
-		console.log(propertyValues); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
-		console.log(propertyValues[propertyValues.length-1]); // 1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00
+		//var propertyValues = Object.values(value);
+		//console.log(propertyValues); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
+		//console.log(propertyValues[propertyValues.length-1]); // 1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00
 	  }); // .then((value) => console.log(value))
 	  
+	  /*
 	  async function getHumidityLastForecast(path) {
 		const dbRef = firebase.database().ref(path);
 		var forecast = await dbRef.once('value').then((snapshot) => {
@@ -81,7 +84,7 @@
 		  }
 		}
 	  }
-	  
+	  */
 	  //var ref = firebase.database().ref().child('forecast/clouds/4');
       //ref.on('value', function(snap) {
 		//document.getElementById("answer").innerHTML = snap.val();
@@ -91,7 +94,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 59</samp>
+	    <samp>Version 60</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
