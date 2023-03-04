@@ -35,19 +35,13 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 	  
-	  //var newPostKey = firebase.database().ref().child('posts').push().key;
-	  
-	  
-	  async function getUserData(userId) {
-		const dbRef = firebase.ref(firebase.getDatabase());
-		var user = await firebase.get(firebase.child(dbRef, `users/$`)).then((snapshot) => {
-		  if (snapshot.exists()) {
-			return snapshot.val();
-		  } else ;
-	    });
-	    return user;
-	  }
-	  //var user = await getUserData(1);
+	  const dbRef = firebase.database().ref("forecast/humidity");
+	  var forecast = dbRef.once('value').then((snapshot) => {
+		if (snapshot.exists()) {
+		  return snapshot.val();
+		} else ;
+	  });
+	  console.log(forecast.value);
 	  
 	  async function getHumidityLastForecast(path) {
 		const dbRef = firebase.database().ref(path);
@@ -58,16 +52,7 @@
 	    });
 	    return forecast;
 	  }
-	  
-	  const dbRef = firebase.database().ref("forecast/humidity");
-	  var forecast = dbRef.once('value').then((snapshot) => {
-		if (snapshot.exists()) {
-		  return snapshot.val();
-		} else ;
-	  });
-	  console.log(forecast.value);
-	  
-	  getHumidityLastForecast("forecast/humidity/0");
+	  getHumidityLastForecast("forecast/humidity/0").then((value) => console.log(value));
 	  
 	  var res = true;
 	  for (var i=0; i<8; i++) {
@@ -76,7 +61,7 @@
 		  var forecast = getHumidityLastForecast(path);
 		  if (forecast != null) {
 			console.log(path);
-			console.log(forecast);
+			forecast.then((value) => console.log(value));
 		  } else {
 			console.log("forecast = null");
 			res = false;
@@ -84,26 +69,16 @@
 		}
 	  }
 	  
-	  
-	  
-				  
-		// firebase.database().ref('users/' + userId).set({
-                    //username: name,
-                    //email: email,
-                    //profile_picture : imageUrl
-                //}); 
-      //console.log("Probe 24-1");	
-
-	  var ref = firebase.database().ref().child('forecast/clouds/4');
-      ref.on('value', function(snap) {
-		document.getElementById("answer").innerHTML = snap.val();
-		console.log("getElementById");
-		console.log(snap.val());
-	  });	
+	  //var ref = firebase.database().ref().child('forecast/clouds/4');
+      //ref.on('value', function(snap) {
+		//document.getElementById("answer").innerHTML = snap.val();
+		//console.log("getElementById");
+		//console.log(snap.val());
+	  //});	
 	  
     </script>
       <h1>
-	    <samp>Version 50</samp>
+	    <samp>Version 52</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
