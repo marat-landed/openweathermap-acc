@@ -59,6 +59,49 @@
 		  });
 	    }
 	  }
+	  /*
+	  async function getUserData(userId) {
+		const dbRef = firebase.ref(firebase.getDatabase());
+		var user = await firebase.get(firebase.child(dbRef, `users/$`)).then((snapshot) => {
+		  if (snapshot.exists()) {
+			return snapshot.val();
+		  } else 
+	    });
+	    return user;
+	  }
+	  var user = await getUserData(1);
+	  */
+	  async function getHumidityLastForecast(path) {
+		const dbRef = firebase.database().ref(path);
+		var forecast = await dbRef.once('value').then((snapshot) => {
+		  if (snapshot.exists()) {
+			return snapshot.val();
+		  } else 
+	    });
+	    return forecast;
+	  }
+	  
+	  var res = true;
+	  for (var i=0; i<8; i++) {
+	    if (res) {
+		  var path = "forecast/humidity/" + i.toString();
+		  console.log(path);
+		  var forecast = await getHumidityLastForecast(path);
+		  if (forecast != null) {
+			  //dataarray = [data,userdata]
+			  console.log(path);
+			  console.log(forecast);
+			  //updatetweets(dataarray); 
+		    } else {
+			  console.log("forecast = null");
+			  res = false;
+		    }
+		  });
+	    }
+	  }
+	  
+	  
+	  
 				  
 		// firebase.database().ref('users/' + userId).set({
                     //username: name,
@@ -76,7 +119,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 39</samp>
+	    <samp>Version 40</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
