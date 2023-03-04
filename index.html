@@ -59,7 +59,7 @@
 		  });
 	    }
 	  }
-	  /*
+	  
 	  async function getUserData(userId) {
 		const dbRef = firebase.ref(firebase.getDatabase());
 		var user = await firebase.get(firebase.child(dbRef, `users/$`)).then((snapshot) => {
@@ -70,7 +70,7 @@
 	    return user;
 	  }
 	  var user = await getUserData(1);
-	  */
+	  
 	  async function getHumidityLastForecast(path) {
 		const dbRef = firebase.database().ref(path);
 		var forecast = await dbRef.once('value').then((snapshot) => {
@@ -119,7 +119,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 41</samp>
+	    <samp>Version 42</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
