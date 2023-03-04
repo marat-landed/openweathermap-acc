@@ -90,14 +90,13 @@
 		  console.log(path);
 		  var forecast = getHumidityLastForecast(path);
 		  if (forecast != null) {
-			  console.log(path);
-			  console.log(forecast);
-		    } else {
-			  console.log("forecast = null");
-			  res = false;
-		    }
-		  });
-	    }
+			console.log(path);
+			console.log(forecast);
+		  } else {
+			console.log("forecast = null");
+			res = false;
+		  }
+		}
 	  }
 	  
 	  
@@ -119,7 +118,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 44</samp>
+	    <samp>Version 45</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
