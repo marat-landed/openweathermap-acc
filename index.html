@@ -42,13 +42,10 @@
 		} else ;
 	  });
 	  //forecast.then(console.log); // .then((value) => console.log(value))
-	  var humidity;
 	  forecast.then((value) => {
-	    humidity = value;
-	    console.log(humidity);
+	    console.log(value.length);
+	    console.log(value[value.length]);
 	  }); // .then((value) => console.log(value))
-	  console.log(humidity.length);
-	  console.log(humidity[humidity.length]);
 	  
 	  async function getHumidityLastForecast(path) {
 		const dbRef = firebase.database().ref(path);
@@ -87,7 +84,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 54</samp>
+	    <samp>Version 55</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
