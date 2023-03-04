@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -40,16 +40,21 @@
 	  const dbRefObject = firebase.database().ref().child('forecast/clouds/0');
 	  dbRefObject.on('value', snap => console.log(snap.val()));
 	  //console.log("Probe 24");
-	  firebase.database().ref('forecast/clouds/1').once('value').then(function(snapshot) { 
-        var userdata = (snapshot.val());
-        if (userdata != null) {
-          //dataarray = [data,userdata]
-          console.log(userdata)
-          //updatetweets(dataarray); 
-        } else {
-		  console.log("userdata = null")
-		}
-      });
+	  for (var i=0; i<8; i++) {
+		var path = "forecast/clouds/" + i.toString();
+		firebase.database().ref(path).once('value').then(function(snapshot) { 
+		  var userdata = (snapshot.val());
+		  if (userdata != null) {
+			//dataarray = [data,userdata]
+			console.log(i);
+			console.log(userdata);
+			//updatetweets(dataarray); 
+		  } else {
+			console.log("userdata = null");
+			break;
+		  }
+		});
+	  }
 				  
 		// firebase.database().ref('users/' + userId).set({
                     //username: name,
@@ -65,7 +70,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 34</samp>
+	    <samp>Version 35</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
