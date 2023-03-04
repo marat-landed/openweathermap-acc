@@ -10,7 +10,8 @@
 	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 	  <script>
       var firebaseConfig = {
-		apiKey: "AIzaSyCRgEIkz7-X52c3e3f4TgqMEBAMF8J6paA",
+		apiKey: "AIzaSyDZCBYYnoI8O9rWW_V9PhksdRppDWfSG4o", 
+		//"AIzaSyCRgEIkz7-X52c3e3f4TgqMEBAMF8J6paA",
 		//authDomain: "probe-web.firebaseapp.com",
 		//https://probe-web-default-rtdb.europe-west1.firebasedatabase.app 
 		//(https://probe-web-default-rtdb.firebaseio.com/)
@@ -18,7 +19,8 @@
 		//storageBucket: "probe-web.appspot.com",
 		//messagingSenderId: "12639340602",
 		//appId: "1:12639340602:web:8895af48f5ac447da90d03",
-		databaseURL: "https://probe-web-default-rtdb.europe-west1.firebasedatabase.app"
+		databaseURL: "https://probe-23-02-2023-default-rtdb.europe-west1.firebasedatabase.app"
+		//"https://probe-web-default-rtdb.europe-west1.firebasedatabase.app"
       };
 	  
 	  function writeUserData(userId, name) {
@@ -33,12 +35,12 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 	  
-	  var newPostKey = firebase.database().ref().child('posts').push().key;
+	  //var newPostKey = firebase.database().ref().child('posts').push().key;
 	  
-	  const dbRefObject = firebase.database().ref().child('/object-key');
+	  const dbRefObject = firebase.database().ref().child('forecast/clouds/0');
 	  dbRefObject.on('value', snap => console.log(snap.val()));
-	  console.log("Probe 24");
-	  firebase.database().ref('users').once('value').then(function(snapshot) { 
+	  //console.log("Probe 24");
+	  firebase.database().ref('forecast/clouds/1').once('value').then(function(snapshot) { 
         var userdata = (snapshot.val());
         if (userdata != null) {
           //dataarray = [data,userdata]
@@ -54,9 +56,9 @@
                     //email: email,
                     //profile_picture : imageUrl
                 //}); 
-      console.log("Probe 24-1");	
+      //console.log("Probe 24-1");	
 
-	  var ref = firebase.database().ref().child('object-key');
+	  var ref = firebase.database().ref().child('forecast/clouds/2');
       ref.on('value', function(snap) {
 		document.getElementById("answer").innerHTML = snap.val();
 	  });	
