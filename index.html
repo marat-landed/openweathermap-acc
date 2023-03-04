@@ -47,7 +47,10 @@
 		console.log(typeof value);
 		console.log(Object.keys(value));
 	    console.log(value.length);
-	    console.log(value[value.length]);
+	    console.log(value[value.length-1]);
+		var propertyValues = Object.values(value);
+		console.log(propertyValues);
+		console.log(propertyValues[propertyValues.length-1]);
 	  }); // .then((value) => console.log(value))
 	  
 	  async function getHumidityLastForecast(path) {
@@ -87,7 +90,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 57</samp>
+	    <samp>Version 58</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
