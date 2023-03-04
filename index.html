@@ -43,14 +43,14 @@
 	  });
 	  //forecast.then(console.log); // .then((value) => console.log(value))
 	  forecast.then((value) => {
-	    console.log(value);
-		console.log(typeof value);
-		console.log(Object.keys(value));
-	    console.log(value.length);
-	    console.log(value[value.length-1]);
+	    console.log(value); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
+		console.log(typeof value); // object
+		console.log(Object.keys(value)); // Array(3) [ "0", "1", "2" ] Ключи
+	    console.log(value.length); // 3
+	    console.log(value[value.length-1]); // 1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00
 		var propertyValues = Object.values(value);
-		console.log(propertyValues);
-		console.log(propertyValues[propertyValues.length-1]);
+		console.log(propertyValues); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
+		console.log(propertyValues[propertyValues.length-1]); // 1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00
 	  }); // .then((value) => console.log(value))
 	  
 	  async function getHumidityLastForecast(path) {
@@ -69,6 +69,7 @@
 	    if (res) {
 		  var path = "forecast/humidity/" + i.toString();
 		  var forecast = getHumidityLastForecast(path);
+		  console.log(forecast);
 		  if (forecast != null) {
 			forecast.then((value) => {
 			  console.log(path);
@@ -90,7 +91,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 58</samp>
+	    <samp>Version 59</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
