@@ -37,7 +37,7 @@
 	  
 	  const path_name = ["temp/min", "temp/max", "pressure"];
 	  for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
-	    var path = "frecast/" + path_name[part_name_no];
+	    var path = "forecast/" + path_name[part_name_no];
 	    const dbRef = firebase.database().ref(path);
 	    var forecast = dbRef.once('value').then((snapshot) => {
 		  if (snapshot.exists()) {
