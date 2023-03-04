@@ -69,11 +69,13 @@
 	  var ref = firebase.database().ref().child('forecast/clouds/2');
       ref.on('value', function(snap) {
 		document.getElementById("answer").innerHTML = snap.val();
+		console.log("getElementById");
+		console.log(snap.val());
 	  });	
 	  
     </script>
       <h1>
-	    <samp>Version 37</samp>
+	    <samp>Version 38</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
