@@ -60,8 +60,10 @@
 		  var path = "forecast/humidity/" + i.toString();
 		  var forecast = getHumidityLastForecast(path);
 		  if (forecast != null) {
-			console.log(path);
-			forecast.then((value) => console.log(value));
+			forecast.then((value) => {
+			  console.log(path);
+			  console.log(value);
+			})
 		  } else {
 			console.log("forecast = null");
 			res = false;
@@ -78,7 +80,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 53</samp>
+	    <samp>Version 54</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
