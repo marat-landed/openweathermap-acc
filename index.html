@@ -37,28 +37,6 @@
 	  
 	  //var newPostKey = firebase.database().ref().child('posts').push().key;
 	  
-	  const dbRefObject = firebase.database().ref().child('forecast/clouds/0');
-	  dbRefObject.on('value', snap => console.log(snap.val()));
-	  //console.log("Probe 24");
-	  var res = true;
-	  for (var i=0; i<8; i++) {
-	    if (res) {
-		  var path = "forecast/humidity/" + i.toString();
-		  console.log(path);
-		  res = firebase.database().ref(path).once('value').then(function(snapshot) { 
-		    var userdata = (snapshot.val());
-		    if (userdata != null) {
-			  //dataarray = [data,userdata]
-			  console.log(path);
-			  console.log(userdata);
-			  //updatetweets(dataarray); 
-		    } else {
-			  console.log("userdata = null");
-			  return false;
-		    }
-		  });
-	    }
-	  }
 	  
 	  async function getUserData(userId) {
 		const dbRef = firebase.ref(firebase.getDatabase());
@@ -95,7 +73,6 @@
 	  for (var i=0; i<8; i++) {
 	    if (res) {
 		  var path = "forecast/humidity/" + i.toString();
-		  console.log(path);
 		  var forecast = getHumidityLastForecast(path);
 		  if (forecast != null) {
 			console.log(path);
@@ -126,7 +103,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 48</samp>
+	    <samp>Version 49</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
