@@ -43,12 +43,12 @@
 	  var res = true;
 	  for (var i=0; i<8; i++) {
 	    if (res) {
-		  var path = "forecast/clouds/" + i.toString();
+		  var path = "forecast/humidity/" + i.toString();
 		  res = firebase.database().ref(path).once('value').then(function(snapshot) { 
 		    var userdata = (snapshot.val());
 		    if (userdata != null) {
 			  //dataarray = [data,userdata]
-			  console.log(i);
+			  console.log(path);
 			  console.log(userdata);
 			  //updatetweets(dataarray); 
 		    } else {
@@ -73,7 +73,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 36</samp>
+	    <samp>Version 37</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
