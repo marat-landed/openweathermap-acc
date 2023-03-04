@@ -81,7 +81,15 @@
 	    return forecast;
 	  }
 	  
-	  getHumidityLastForecast(forecast/humidity/0);
+	  const dbRef = firebase.database().ref(forecast/humidity);
+	  var forecast = dbRef.once('value').then((snapshot) => {
+		if (snapshot.exists()) {
+		  return snapshot.val();
+		} else ;
+	  });
+	  console(forecast);
+	  
+	  getHumidityLastForecast("forecast/humidity/0");
 	  
 	  var res = true;
 	  for (var i=0; i<8; i++) {
@@ -118,7 +126,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 45</samp>
+	    <samp>Version 46</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
