@@ -51,7 +51,7 @@
 	  
 	  function load_page(page_name) {
 	    var xhr= new XMLHttpRequest();
-	    xhr.open('GET', page_name, true);
+	    xhr.open('GET', 'pages/' + page_name, true);
 	    xhr.onreadystatechange= function() {
 		  if (this.readyState!==4) return;
 		  if (this.status!==200) return; // or whatever error handling you want
@@ -131,7 +131,7 @@
 	    xhr.send();
 	  }
 	
-	  load_page('pages/home');
+	  load_page('home');
 	  load_page('forecasts');
 	  load_page('archive_tab');
 	  load_page('statistics_graph_tab');
