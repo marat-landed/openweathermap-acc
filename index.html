@@ -35,30 +35,26 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 	  
-	  const path_name = ["temp/min", "temp/max", "pressure"];
-	  for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
-	    var path = "forecast/" + path_name[part_name_no];
+	  // Получение оследнего прогноза одного параметра по заданному пути path
+	  async function get_last_orecast_param (path) {
 	    const dbRef = firebase.database().ref(path);
-	    var forecast = dbRef.once('value').then((snapshot) => {
+	    var forecast = await dbRef.once('value').then((snapshot) => {
 		  if (snapshot.exists()) {
 		    return snapshot.val();
 		  } else ;
 	    });
-	  
-	    //forecast.then(console.log); // .then((value) => console.log(value))
-	    forecast.then((value) => {
-	    //console.log(value); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
-		//console.log(typeof value); // object
-		//console.log(Object.keys(value)); // Array(3) [ "0", "1", "2" ] Ключи
-	    //console.log(value.length); // 3
-		  // Последний прогноз
-		  console.log("Последний прогноз " + path);
-	      console.log(value[value.length-1]); // 1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00
-		//var propertyValues = Object.values(value);
-		//console.log(propertyValues); // Array(3) [ "1677920403 72.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920412 71.00 50.00 39.00 61.00 83.00 89.00 72.00 78.00", "1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00" ]
-		//console.log(propertyValues[propertyValues.length-1]); // 1677920502 67.00 53.00 38.00 60.00 78.00 69.00 62.00 74.00
-	    }); // .then((value) => console.log(value))
+		return forecast
 	  }
+	  
+	  const path_name = ["temp/min", "temp/max", "pressure"];
+	  for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
+	    var path = "forecast/" + path_name[part_name_no];
+		get_last_orecast_param (path).then ((value) => {
+		  console.log(path, value);
+		})
+	  }
+	    
+
 	  
 	  /*
 	  async function getHumidityLastForecast(path) {
@@ -99,7 +95,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 61</samp>
+	    <samp>Version 62</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
