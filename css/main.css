@@ -1,10 +1,208 @@
-body, html {
-    background: white;
-    color: black;
-    font-family:  Helvetica, Arial, sans-serif;
-    font-size: 1em;
+html {
+  /*font-family: Arial;*/
+  display: inline-block;
+  margin: 0px auto;
+  text-align: center;
+  width: 600px;
+  /*border: 1px double black;*/
+  /*background: red;*/ /* Цвет фона */
+}
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 13px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.chart-container {
+  height: 320px;
+}
+
+.highcharts-container{
+  width: 100% !important;
+}
+
+.highcharts-root{
+  width: 100% !important;
+}
+
+.highcharts-title {
+    fill: #434348;
+    font-weight: bold;
+    /*letter-spacing: 0.3em;*/
+    font-size: 14px !important;
+}
+
+.highcharts-subtitle {
+    font-family: "Courier New", monospace;
+    font-style: italic;
+    fill: #7cb5ec;
+}
+
+.highcharts-caption {
+    font-family: "Courier New", monospace;
+    font-style: italic;
+    fill: green;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+  }
+.fit { /* set relative picture size */
+  max-width: 100%;
+  max-height: 100%;
+}
+.center {
+  display: block;
+  margin: auto;
+}
+		
+table.fixed-table
+{
+  width:100%; 
+  table-layout:fixed;
+}
+ 
+table.fixed-table td
+{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+ 
+/*Don't forget to set the width for td or th (should apply to the first row) */
+table.fixed-table td.descr
+{
+  width:43%;
+}
+table.fixed-table td.descr2
+{
+  width:57%;
+}
+.table_arch, .table_err {
+  font-size: 11px;
+  border-collapse: collapse; /* убирает задвоенность рамки */
+  border: 1px solid black;
+  margin: auto;
+}
+TD {
+  padding: 3px; /* Поля вокруг содержимого таблицы */
+  border: 1px solid maroon; /* Параметры рамки */
+  text-align: right; /* Выравнивание по правому краю */
+}
+TH {
+  padding: 3px; /* Поля вокруг содержимого таблицы */
+  border: 1px solid maroon; /* Параметры рамки */
+  text-align: center; /* Выравнивание по правому краю */
+}
+p.p_home {
+  font-size: 12px;
+  text-align: left;  
+}
+.highcharts-title {
+  font-weight: normal;
+}
+
+.highcharts-container{
+  height: 100% !important;
+}
+.highcharts-legend {
+  width: calc(100% - 2.1rem + 10px);
+  height: 5rem;
+  max-height: 5rem;
+  position: absolute;
+  overflow: auto;
+  margin: 1rem 0;
+  & > g:nth-of-type(2) {
+    display: none;
+  }
+  & * {
+    position: relative !important;
+    left: unset !important;
+    top: unset !important;
+  }
+  & > div {
+    & > div {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+  &::-webkit-scrollbar {
+    width: 1rem;
+  }
+  &::-webkit-scrollbar-track {
+    
+    border-radius: 10rem;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: rgba(gray, 0.5);
+    border: 0.3rem solid transparent;
+    background-clip: content-box;
+    
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: gray;
+  }
+}
+.chartSymbol {
+  width: 1.1rem;
+  height: 1.1rem;
+  position: absolute;
+  border-radius: 50%;
+}
+.highcharts-legend-item {
+  border-radius: 1rem;
+  & > path {
+    display: none;
+  }
+  & > span {
+    position: relative;
+    border-radius: 1rem;
+    border: 1px solid #bababa;
+    padding: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  &:hover {
+    background-color: #f5f5f5;
+  }
 }
