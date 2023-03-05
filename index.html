@@ -78,6 +78,7 @@
 	  async function prepare_last_forecasts() {
 	    await get_last_forecasts().then (() => {
 		  console.log(all_last_forecasts);
+		  console.log("Передаем для построения графиков");
 		})
 	  }
 
@@ -122,8 +123,8 @@
 	  //});	
 	  
     </script>
-      <h2>
-	    <samp>Version 74</samp>
+      <h3>
+	    <samp>Version 75</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
@@ -131,7 +132,7 @@
           <em>Библиотека www.gstatic.com/firebasejs/8.10.0/firebase-database.js</em>
         </small>
 		Пробная версия
-      </h2>
+      </h3>
 	  <hr>
       <label>Answer:<span id='answer'></span></label>
     </body>
