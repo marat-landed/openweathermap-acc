@@ -9,6 +9,20 @@
 	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 	  <script>
+	  
+	  
+	  /*
+		import    from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+		import {
+		  getDatabase,
+		  ref,
+		  get,
+		  set,
+		  child,
+		} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+	  */
+	  
+	  
       var firebaseConfig = {
 		apiKey: "AIzaSyDZCBYYnoI8O9rWW_V9PhksdRppDWfSG4o", 
 		//"AIzaSyCRgEIkz7-X52c3e3f4TgqMEBAMF8J6paA",
@@ -36,7 +50,7 @@
       firebase.initializeApp(firebaseConfig);
 	  
 	  // Получение оследнего прогноза одного параметра по заданному пути path
-	  async function get_last_orecast_param (path) {
+	  async function get_last_forecast_param (path) {
 	    const dbRef = firebase.database().ref(path);
 	    var forecast = await dbRef.once('value').then((snapshot) => {
 		  if (snapshot.exists()) {
@@ -45,14 +59,14 @@
 		  } else ;
 	    });
 		console.log("path2: ", path);
-		return forecast
+		return forecast;
 	  }
 	  
 	  const path_name = ["temp/min", "temp/max", "pressure"];
 	  for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
 	    var path = "forecast/" + path_name[part_name_no];
-		get_last_orecast_param (path).then ((value) => {
-		  console.log(path, value);
+		get_last_forecast_param (path).then ((value) => {
+		  console.log("path0: ", path, value[value.length-1]);
 		})
 	  }
 	    
@@ -97,7 +111,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 63</samp>
+	    <samp>Version 65</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
