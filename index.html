@@ -40,9 +40,11 @@
 	    const dbRef = firebase.database().ref(path);
 	    var forecast = await dbRef.once('value').then((snapshot) => {
 		  if (snapshot.exists()) {
+		    console.log("path: ", path);
 		    return snapshot.val();
 		  } else ;
 	    });
+		console.log("path2: ", path);
 		return forecast
 	  }
 	  
@@ -95,7 +97,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 62</samp>
+	    <samp>Version 63</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
