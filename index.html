@@ -61,11 +61,15 @@
 	  }
 	  
 	  const path_name = ["temp/min", "temp/max", "pressure"];
+	  const all_last_forecasts = new Object();
 	  async function get_last_forecasts() {
 	    for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
 	      var path = "forecast/" + path_name[part_name_no];
 		  await get_last_forecast_param (path).then ((value) => {
-		    console.log("path: ", path, value[value.length-1]);
+		    console.log(path, value[value.length-1]);
+			// Здесь вызывать функцию построения графика параметра
+			all_last_forecasts[path] = value[value.length-1];
+			console.log(path, all_last_forecasts[path]);
 		  })
 	    }
 	  }
@@ -113,7 +117,7 @@
 	  
     </script>
       <h1>
-	    <samp>Version 67</samp>
+	    <samp>Version 68</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
