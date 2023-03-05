@@ -1,0 +1,29 @@
+<h4>Статистика точности прогнозов</h4>
+<div id="chart-mean-error" class="chart-container"></div>
+<div id="chart-distribution-errors" class="chart-container"></div>
+<p style="font-size: 12px;">
+  Глубина прогноза, дней:
+  <label class="radio-inline">
+    <input type="radio" name="day-forecast" value="1" onclick="day_forecastRadio(value)" checked>1
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="day-forecast" value="2" onclick="day_forecastRadio(value)">2
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="day-forecast" value="3" onclick="day_forecastRadio(value)">3
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="day-forecast" value="4" onclick="day_forecastRadio(value)">4
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="day-forecast" value="5" onclick="day_forecastRadio(value)">5
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="day-forecast" value="6" onclick="day_forecastRadio(value)">6
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="day-forecast" value="7" onclick="day_forecastRadio(value)">7
+  </label>
+</p>
+<br>
+<p style="font-size: 12px; color: brown;"><em>Результаты <span id="stat_day"></span> наблюдений (дней)</em></p>

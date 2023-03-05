@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="main.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+	<script src="jquery-3.2.1.min.js"></script>
+	<script src="highcharts.js"></script>
+	<!--<script src="https://code.highcharts.com/highcharts.js.map"></script>
+	<script src="https://code.highcharts.com/windbarb.js.map"></script>-->
+	<script src="windbarb.js"></script>
+	<script src="load_archive.js"></script>
+    <script src="plot_last_forecast.js"></script>
+	<script src="plot_all_forecasts.js"></script>
+	<script src="load_error.js"></script>
+	<meta charset="UTF-8">
+	
+  </head>
+  <body>
+	<div class="tab">
+	  <button class="tablinks" onclick="openTab(event, 'home')" id="defaultOpen">Главная</button>
+	  <button class="tablinks" onclick="openTab(event, 'forecasts')">Прогноз</button>
+	  <button class="tablinks" onclick="openTab(event, 'statistics_graph_tab')">Статистика</button>
+	  <button class="tablinks" onclick="openTab(event, 'archive_tab')">Архив</button>
+	  <button class="tablinks" onclick="openTab(event, 'about')">О программе</button>
+	  <button class="tablinks" onclick="openTab(event, 'site_traffic')">Посещаемость</button>
+	</div>
+
+	<div id="home" class="tabcontent"></div>
+	<div id="forecasts" class="tabcontent"></div>
+	<div id="archive_tab" class="tabcontent"></div>
+	<div id="statistics_graph_tab" class="tabcontent"></div>
+	<div id="about" class="tabcontent"></div>
+	<div id="site_traffic" class="tabcontent"></div>
+
+	<script>
+	  function openTab(evt, tabName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+		  tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+		  tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+	  }
+	  
+	  function load_page(page_name) {
+	    var xhr= new XMLHttpRequest();
+	    xhr.open('GET', page_name, true);
+	    xhr.onreadystatechange= function() {
+		  if (this.readyState!==4) return;
+		  if (this.status!==200) return; // or whatever error handling you want
+		  document.getElementById(page_name).innerHTML= this.responseText;
+		  if (page_name == 'forecasts') {
+		    // Последний прогноз
+			/*
+			  $.ajax({
+				url: "/forecast_old",
+				contentType: "application/json",
+				dataType : "json",
+				processData: false,
+				complete: function (data) {
+				  // 0: {id: 45, temp_max: Array(8), temp_min: Array(8), clouds: Array(8), prob_prec: Array(8), …}
+				  var last_forecast = JSON.parse(data.responseText);
+				  //console.log(data.responseText); // {"temp_max":[23,23,23,23,23,23,23,23],"temp_min":[12,12,12,23,23,23,23,23]}
+				  // { today_utc: 1676538000, temp_max: (8) [-4, -4, 2, … ], temp_min: (8) […], pressure: (8) […], clouds: (8) […], precipitation: (8) […], wind_speed: (8) […], wind_direct: (8) […], weather_icon_num: (8) […] }
+				  console.log("last_forecast:");
+				  console.log(last_forecast); // Object { temp_max: (8) […], temp_min: (8) […] }
+				  //print_last_forecast(last_forecast); // Выводим последний прогноз
+				}
+			  });
+			  */
+			  // Архив прогнозов и последний прогноз
+			  $.ajax({
+				url: "/forecast",
+				contentType: "application/json",
+				dataType : "json",
+				processData: false,
+				complete: function (data) {
+				  var archive = JSON.parse(data.responseText);
+				  plot_last_forecast(archive); // Выводим последний прогноз
+				  plot_all_forecasts(archive); // Выводим архив всех имеющихся прогнозов
+				}
+			  });
+			  // Статистика прогнозов
+			  $.ajax({
+				url: "/statistics",
+				contentType: "application/json",
+				dataType : "json",
+				processData: false,
+				complete: function (data) {
+				  // 0: {id: 45, temp_max: Array(8), temp_min: Array(8), clouds: Array(8), prob_prec: Array(8), …}
+				  var error_statistics = JSON.parse(data.responseText);
+				  //console.log(data.responseText); // {"temp_max":[23,23,23,23,23,23,23,23],"temp_min":[12,12,12,23,23,23,23,23]}
+				  //console.log("error_statistics: ",error_statistics);
+				  //console.log(last_statistics); // Object { temp_max: (8) […], temp_min: (8) […] }
+				  print_error_statistics(error_statistics); // Выводим статистику ошибок
+				}
+			  });
+		  } else if (page_name == 'statistics_graph_tab') {
+		    // Статистика прогнозов графики
+			$.ajax({
+				url: "/statistics_graph",
+				contentType: "application/json",
+				dataType : "json",
+				processData: false,
+				complete: function (data) {
+				  // 0: {id: 45, temp_max: Array(8), temp_min: Array(8), clouds: Array(8), prob_prec: Array(8), …}
+				  var error_statistics = JSON.parse(data.responseText);
+				  //console.log(data.responseText); // {"statistic":[[24,17,3,2,0,0,0,0,0,0,0],[16,20,8,2,0,0,0,0,0,0,0],[10,24,8,3,1,0,0,0,0,0,0],[16,11,12,5,2,0,0,0,0,0,0],[6,14,14,3,7,1,0,0,0,0,0],[10,11,12,9,0,2,0,0,0,1,0],[8,11,9,7,3,2,1,3,0,0,0],[18,14,7,5,1,1,0,0,0,0,0],[15,18,6,5,2,0,0,0,0,0,0],[9,18,11,2,4,1,1,0,0,0,0],[8,14,7,6,7,2,1,0,0,1,0],[4,10,9,7,6,4,3,1,0,0,1],[5,10,8,6,8,2,3,1,0,1,1],[4,9,7,8,3,2,5,3,3,0,0]]}
+				  //console.log("error_statistics for graph: ",error_statistics.statistic);
+				  //Array(14) Каждый элемент массива - массив из 11 эл-тов.
+				  // [0]: количество ошибок прогноза tmin на один день в 0 градусов, в 1 градус,..., в 10 и более градусов.
+				  // [1]: количество ошибок прогноза tmin на два дня в 0 градусов, в 1 градус,..., в 10 и более градусов.
+				  print_error_statistics_graph(error_statistics.statistic); // Выводим статистику ошибок на график
+				}
+			  });
+		  } else if (page_name == 'site_traffic') {
+		    var script = document.createElement('script');
+			script.src = "http://rf.revolvermaps.com/0/0/7.js?i=5ffqvufr1j9&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;sx=0";
+			script.async = true; // false - чтобы гарантировать порядок
+			//document.head.appendChild(script);
+			document.getElementById("Revolvermaps").appendChild(script);
+		  }
+	    };
+	    xhr.send();
+	  }
+	
+	  load_page('home');
+	  load_page('forecasts');
+	  load_page('archive_tab');
+	  load_page('statistics_graph_tab');
+	  load_page('about');
+	  load_page('site_traffic');
+	  
+	  document.getElementById("defaultOpen").click(); // Открываем 1-ю закладку
+	</script>
+	<!--
+<script type="text/javascript" src="http://rf.revolvermaps.com/0/0/7.js?i=5ffqvufr1j9&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;sx=0" async="async"></script>	
+-->
+</body>
+</html> 

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Исследование точности прогнозов погоды от OpenWeatherMap</title>
+        <!--<link rel="stylesheet" href="style.css" />-->
+    </head>
+    <body>
+	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+	  <script>
+	  
+	  
+	  /*
+		import    from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+		import {
+		  getDatabase,
+		  ref,
+		  get,
+		  set,
+		  child,
+		} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+	  */
+	  
+	  
+      var firebaseConfig = {
+		apiKey: "AIzaSyDZCBYYnoI8O9rWW_V9PhksdRppDWfSG4o", 
+		//"AIzaSyCRgEIkz7-X52c3e3f4TgqMEBAMF8J6paA",
+		//authDomain: "probe-web.firebaseapp.com",
+		//https://probe-web-default-rtdb.europe-west1.firebasedatabase.app 
+		//(https://probe-web-default-rtdb.firebaseio.com/)
+		//projectId: "probe-web",
+		//storageBucket: "probe-web.appspot.com",
+		//messagingSenderId: "12639340602",
+		//appId: "1:12639340602:web:8895af48f5ac447da90d03",
+		databaseURL: "https://probe-23-02-2023-default-rtdb.europe-west1.firebasedatabase.app"
+		//"https://probe-web-default-rtdb.europe-west1.firebasedatabase.app"
+      };
+	  
+	  function writeUserData(userId, name) {
+		const db = firebase.database();
+		firebase.set(firebase.ref(db, 'users1/' + userId), {
+		  username: name,
+		 });
+	  }
+
+	  //writeUserData(1, "jacob");
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+	  
+	  // Получение оследнего прогноза одного параметра по заданному пути path
+	  async function get_last_forecast_param (path) {
+	    const dbRef = firebase.database().ref(path);
+	    var forecast = await dbRef.once('value').then((snapshot) => {
+		  if (snapshot.exists()) {
+		    return snapshot.val();
+		  } else ;
+	    });
+		return forecast;
+	  }
+	  
+	  const path_name = ["temp/min", "temp/max", "pressure", "humidity", "wind_speed",
+	    "wind_deg", "clouds", "pop", "weather/icon"];
+	  const all_last_forecasts = new Object();
+	  async function get_last_forecasts() {
+	    for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
+	      var path = "forecast/" + path_name[part_name_no];
+		  await get_last_forecast_param (path).then ((value) => {
+		    //console.log(path, value[value.length-1]);
+			// Здесь вызывать функцию построения графика параметра
+			all_last_forecasts[path] = value[value.length-1];
+			//console.log(path, all_last_forecasts[path]);
+		  })
+	    }
+	  }
+	  
+	  async function prepare_last_forecasts() {
+	    await get_last_forecasts().then (() => {
+		  console.log(all_last_forecasts);
+		  console.log("Передаем для построения графиков");
+		})
+	  }
+
+	  prepare_last_forecasts();
+
+	  
+	  /*
+	  async function getHumidityLastForecast(path) {
+		const dbRef = firebase.database().ref(path);
+		var forecast = await dbRef.once('value').then((snapshot) => {
+		  if (snapshot.exists()) {
+			return snapshot.val();
+		  } else ;
+	    });
+	    return forecast;
+	  }
+	  //getHumidityLastForecast("forecast/humidity/0").then((value) => console.log(value));
+	  
+	  var res = true;
+	  for (var i=0; i<8; i++) {
+	    if (res) {
+		  var path = "forecast/humidity/" + i.toString();
+		  var forecast = getHumidityLastForecast(path);
+		  console.log(forecast);
+		  if (forecast != null) {
+			forecast.then((value) => {
+			  console.log(path);
+			  console.log(value);
+			})
+		  } else {
+			console.log("forecast = null");
+			res = false;
+		  }
+		}
+	  }
+	  */
+	  //var ref = firebase.database().ref().child('forecast/clouds/4');
+      //ref.on('value', function(snap) {
+		//document.getElementById("answer").innerHTML = snap.val();
+		//console.log("getElementById");
+		//console.log(snap.val());
+	  //});	
+	  
+    </script>
+      <h3>
+	    <samp>Version 79</samp>
+		<br />
+        04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
+        <br />
+		<small>
+          <em>Библиотека www.gstatic.com/firebasejs/8.10.0/firebase-database.js</em>
+        </small>
+		Версия рабочая с 5-03-2023
+      </h3>
+	  <hr>
+      <label>Answer:<span id='answer'></span></label>
+    </body>
+</html>
