@@ -60,7 +60,8 @@
 		return forecast;
 	  }
 	  
-	  const path_name = ["temp/min", "temp/max", "pressure"];
+	  const path_name = ["temp/min", "temp/max", "pressure", "humidity", "wind-speed",
+	    "wind-deg"];
 	  const all_last_forecasts = new Object();
 	  async function get_last_forecasts() {
 	    for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
@@ -77,7 +78,7 @@
 	  async function prepare_last_forecasts() {
 	    await get_last_forecasts().then (() => {
 		  console.log(all_last_forecasts);
-		}
+		})
 	  }
 
 	  prepare_last_forecasts();
