@@ -60,8 +60,8 @@
 		return forecast;
 	  }
 	  
-	  const path_name = ["temp/min", "temp/max", "pressure", "humidity"];
-	  //, "wind-speed",
+	  const path_name = ["temp/min", "temp/max", "pressure", "humidity", "wind-speed"];
+	  //,
 	  //  "wind-deg", "clouds", "pop", "weather/icon"];
 	  const all_last_forecasts = new Object();
 	  async function get_last_forecasts() {
@@ -124,7 +124,7 @@
 	  
     </script>
       <h2>
-	    <samp>Version 72</samp>
+	    <samp>Version 73</samp>
 		<br />
         04-03-2023 Исследование точности прогнозов погоды от OpenWeatherMap
         <br />
