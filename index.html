@@ -84,8 +84,9 @@
 	  
 	  async function prepare_last_forecasts() {
 	    await get_last_forecasts().then (() => {
-		  console.log(all_last_forecasts);
+		  //console.log(all_last_forecasts);
 		  console.log("Передаем для построения графиков");
+		  plot_last_forecast(all_last_forecasts); // Выводим последний прогноз
 		})
 	  }
 	
