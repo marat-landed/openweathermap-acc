@@ -76,7 +76,7 @@
 		  await get_last_forecast_param (path).then ((value) => {
 		    //console.log(path, value[value.length-1]);
 			// Здесь вызывать функцию построения графика параметра
-			all_last_forecasts[path] = value[value.length-1];
+			all_last_forecasts[path] = value[0]; // value.length-1
 			//console.log(path, all_last_forecasts[path]);
 		  })
 	    }
