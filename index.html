@@ -14,6 +14,8 @@
 	<!--<script src="https://code.highcharts.com/highcharts.js.map"></script>
 	<script src="https://code.highcharts.com/windbarb.js.map"></script>-->
 	<script src="js/windbarb.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 	<script src="js/load_archive.js"></script>
     <script src="js/plot_last_forecast.js"></script>
 	<script src="js/plot_all_forecasts.js"></script>
@@ -39,6 +41,54 @@
 	<div id="site_traffic" class="tabcontent"></div>
 
 	<script>
+	  var firebaseConfig = {
+		apiKey: "AIzaSyDZCBYYnoI8O9rWW_V9PhksdRppDWfSG4o", 
+		databaseURL: "https://probe-23-02-2023-default-rtdb.europe-west1.firebasedatabase.app"
+      };
+	  
+	  function writeUserData(userId, name) {
+		const db = firebase.database();
+		firebase.set(firebase.ref(db, 'users1/' + userId), {
+		  username: name,
+		 });
+	  }
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+	  
+	  // Получение оследнего прогноза одного параметра по заданному пути path
+	  async function get_last_forecast_param (path) {
+	    const dbRef = firebase.database().ref(path);
+	    var forecast = await dbRef.once('value').then((snapshot) => {
+		  if (snapshot.exists()) {
+		    return snapshot.val();
+		  } else ;
+	    });
+		return forecast;
+	  }
+	  
+	  const path_name = ["temp/min", "temp/max", "pressure", "humidity", "wind_speed",
+	    "wind_deg", "clouds", "pop", "weather/icon"];
+	  const all_last_forecasts = new Object();
+	  async function get_last_forecasts() {
+	    for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
+	      var path = "forecast/" + path_name[part_name_no];
+		  await get_last_forecast_param (path).then ((value) => {
+		    //console.log(path, value[value.length-1]);
+			// Здесь вызывать функцию построения графика параметра
+			all_last_forecasts[path] = value[value.length-1];
+			//console.log(path, all_last_forecasts[path]);
+		  })
+	    }
+	  }
+	  
+	  async function prepare_last_forecasts() {
+	    await get_last_forecasts().then (() => {
+		  console.log(all_last_forecasts);
+		  console.log("Передаем для построения графиков");
+		})
+	  }
+	
 	  function openTab(evt, tabName) {
 		var i, tabcontent, tablinks;
 		tabcontent = document.getElementsByClassName("tabcontent");
@@ -61,24 +111,9 @@
 		  if (this.status!==200) return; // or whatever error handling you want
 		  document.getElementById(page_name).innerHTML= this.responseText;
 		  if (page_name == 'forecasts') {
-		    // Последний прогноз
+		    // Подготовка последних прогнозов и передача их для построения графиков
+			prepare_last_forecasts();
 			/*
-			  $.ajax({
-				url: "/forecast_old",
-				contentType: "application/json",
-				dataType : "json",
-				processData: false,
-				complete: function (data) {
-				  // 0: {id: 45, temp_max: Array(8), temp_min: Array(8), clouds: Array(8), prob_prec: Array(8), …}
-				  var last_forecast = JSON.parse(data.responseText);
-				  //console.log(data.responseText); // {"temp_max":[23,23,23,23,23,23,23,23],"temp_min":[12,12,12,23,23,23,23,23]}
-				  // { today_utc: 1676538000, temp_max: (8) [-4, -4, 2, … ], temp_min: (8) […], pressure: (8) […], clouds: (8) […], precipitation: (8) […], wind_speed: (8) […], wind_direct: (8) […], weather_icon_num: (8) […] }
-				  console.log("last_forecast:");
-				  console.log(last_forecast); // Object { temp_max: (8) […], temp_min: (8) […] }
-				  //print_last_forecast(last_forecast); // Выводим последний прогноз
-				}
-			  });
-			  */
 			  // Архив прогнозов и последний прогноз
 			  $.ajax({
 				url: "/forecast",
@@ -106,6 +141,7 @@
 				  print_error_statistics(error_statistics); // Выводим статистику ошибок
 				}
 			  });
+			*/  
 		  } else if (page_name == 'statistics_graph_tab') {
 		    // Статистика прогнозов графики
 			$.ajax({
