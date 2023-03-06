@@ -256,6 +256,9 @@ function create_chart_temp(renderTo) {
 		tooltip: {
 			//valueDecimals: 2,
 			valueSuffix: ' °C'
+		},
+		formatter: function () {
+		  return Highcharts.numberFormat(this.y,1);
 		}
 	  },
 	  {
@@ -426,7 +429,7 @@ function create_chart_clouds_precipitation(renderTo) {
 	},
 	series: [
 	  {
-		name: 'Осадки (дождь/снег)',
+		name: 'Количество осадков (дождь/снег)',
 		type: 'column',
 		yAxis: 0,
 		pointInterval: 86400000,
