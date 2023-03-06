@@ -43,7 +43,20 @@ function plot_last_forecast(archive) {
 	})
   }
   console.log("last_forecast:",last_forecast);
-  //plotChart(last_forecast);
+  /*
+  Object { "forecast/temp/min": (8) […], today_utc: "1678093200", "forecast/temp/max": (8) […], "forecast/pressure": (8) […], "forecast/humidity": (8) […], "forecast/wind_speed": (8) […], "forecast/wind_deg": (8) […], "forecast/clouds": (8) […], "forecast/pop": (8) […], "forecast/weather/icon": (16) […] }
+​	"forecast/clouds": Array(8) [ 30, 76, 100, … ]
+​	"forecast/humidity": Array(8) [ 35, 69, 76, … ]
+​	"forecast/pop": Array(8) [ 0.2, 0.34, 0.91, … ]
+​	"forecast/pressure": Array(8) [ 1007, 1010, 1010, … ]
+​	"forecast/temp/max": Array(8) [ 3.62, 5.22, 10.82, … ]
+​	"forecast/temp/min": Array(8) [ -1.09, -0.75, 0.41, … ]
+​	"forecast/weather/icon": Array(16) [ NaN, NaN, NaN, … ]
+​	"forecast/wind_deg": Array(8) [ 263, 185, 197, … ]
+​	"forecast/wind_speed": Array(8) [ 5.17, 5.67, 6.3, … ]
+​	today_utc: "1678093200"
+  */
+  plotChart(last_forecast);
 }
 
 //Plot temperature in the temperature chart
@@ -72,20 +85,20 @@ function plotChart(jsonValue) {
   //for (var key = 1; key < 8; key++){
   for (var key = 0; key < keys.length; key++){
 	if (keys[key]=="today_utc") continue;
-	if ((keys[key]=="wind_speed") || (keys[key]=="wind_direct")) {
-	  var param = jsonValue["wind_speed"]; // wind_speed
-	  var param1 = jsonValue["wind_direct"]; // wind_direct
-	} else if (keys[key]=="clouds") {
-	  var param = jsonValue["clouds"]; // clouds
-	  var param1 = jsonValue["weather_icon_num"]; // weather_icon_num
+	if ((keys[key]=="forecast/wind_speed") || (keys[key]=="forecast/wind_deg")) {
+	  var param = jsonValue["forecast/wind_speed"]; // wind_speed
+	  var param1 = jsonValue["forecast/wind_deg"]; // wind_direct
+	} else if (keys[key]=="forecast/clouds") {
+	  var param = jsonValue["forecast/clouds"]; // clouds
+	  var param1 = jsonValue["forecast/weather/icon"]; // weather_icon_num
 	} else {
 	  var param = jsonValue[keys[key]];
 	}
 	param.forEach((element, index) => {
-	  if ((keys[key]=="wind_speed") || (keys[key]=="wind_direct")) { // ветер: сорость (м/с) и направление
+	  if ((keys[key]=="forecast/wind_speed") || (keys[key]=="forecast/wind_deg")) { // ветер: сорость (м/с) и направление
 	    data.push([param[index], param1[index]]);
 	  }
-	  else if (keys[key]=="clouds") {
+	  else if (keys[key]=="forecast/clouds") {
 		var y1 = param[index]; 
 		var weather_icon_str = icon_num_to_str(param1[index]);
 		var marker1 = {
@@ -104,22 +117,22 @@ function plotChart(jsonValue) {
 	  }
 	});
 				
-	if (keys[key]=="temp_max") { // temp_max
+	if (keys[key]=="forecast/temp/max") { // temp_max
 	  chartT.series[1].update({
 	    pointStart: pointStart_curr,
 		data: data //data.data
 	  })	
-	} else if (keys[key]=="temp_min") { // temp_min
+	} else if (keys[key]=="forecast/temp/min") { // temp_min
 	  chartT.series[2].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })	
-	} else if (keys[key]=="pressure") { // pressure
+	} else if (keys[key]=="forecast/pressure") { // pressure
 	  chartT.series[0].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} else if (keys[key]=="clouds") { // clouds
+	} else if (keys[key]=="forecast/clouds") { // clouds
 	  chartClPr.series[1].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
@@ -129,12 +142,12 @@ function plotChart(jsonValue) {
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} else if (keys[key]=="wind_speed") {
+	} else if (keys[key]=="forecast/wind_speed") {
 	  chartT.series[3].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} else if (keys[key]=="wind_direct") {
+	} else if (keys[key]=="forecast/wind_deg") {
 	  chartT.series[4].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
