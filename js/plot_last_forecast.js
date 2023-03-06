@@ -27,30 +27,23 @@ function plot_last_forecast(archive) {
   var keys = Object.keys(archive);
   for (var key = 0; key < keys.length; key++){
 	var param = archive[keys[key]];
-	console.log("typeof param:");
-	console.log(typeof param);
-	console.log("param:");
-	console.log(param);
+	console.log("typeof param:", typeof param);
+	console.log("param:", param);
 	//console.log(keys[key]);
 	//console.log(param[0]);
-	// param[i] - строка прогноза вида: 1676538000 -4 -3 2 2 0 2 2 4
-	// Прогнозы идут в порядке: самый старый,..., самый новый.
-	//const myArray = param[param.length-1].split(" ");
-	const myArray = param.split(" ");
-	console.log("myArray:");
-	console.log(myArray);
+	// param - строка прогноза вида: 1676538000 -4 -3 2 2 0 2 2 4
+	const myArray = param.split(" "); // [ "1678093200", "-1.09", "-0.75", "0.41", "6.27", "0.35", "-0.61", "3.14", "1.09" ]
+	console.log("myArray:", myArray);
 	last_forecast[keys[key]]=[];
 	myArray.forEach((element, index) => {
 	  if ((key==0) && (index==0)) last_forecast["today_utc"] = element;
 	  let val = Number(element);
-      if ((keys[key]=="precipitation") || (keys[key]=="wind_speed"))
-		val = val/100.;
+      //if ((keys[key]=="precipitation") || (keys[key]=="wind_speed")) val = val/100.;
       if (index>0) last_forecast[keys[key]].push(val);	  
 	})
   }
-  //console.log("last_forecast:");
-  //console.log(last_forecast);
-  plotChart(last_forecast);
+  console.log("last_forecast:",last_forecast);
+  //plotChart(last_forecast);
 }
 
 //Plot temperature in the temperature chart
