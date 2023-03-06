@@ -280,6 +280,9 @@ function create_chart_temp(renderTo) {
             textOutline: 'none',
             fontWeight: 'normal',
           },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
 		},
 		tooltip: {
           valueSuffix: ' °C',
