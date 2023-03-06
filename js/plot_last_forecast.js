@@ -102,7 +102,8 @@ function plotChart(jsonValue) {
 	  }
 	  else if (keys[key]=="forecast/clouds") {
 		var y1 = param[index]; 
-		var weather_icon_str = icon_num_to_str(param1[index]);
+		//var weather_icon_str = icon_num_to_str(param1[index]);
+		var weather_icon_str = param1[index];
 		var marker1 = {
 		  fillColor: 'red',
           radius: 5,
