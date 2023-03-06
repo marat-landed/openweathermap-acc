@@ -21,18 +21,18 @@ function plot_last_forecast(archive) {
 
   let last_forecast = {};
   
-  console.log("archive:",archive);
+  //console.log("archive:",archive);
   
   var keys = Object.keys(archive);
   for (var key = 0; key < keys.length; key++){
 	var param = archive[keys[key]];
-	console.log("typeof param:", typeof param);
-	console.log("param:", param);
+	//console.log("typeof param:", typeof param);
+	//console.log("param:", param);
 	//console.log(keys[key]);
 	//console.log(param[0]);
 	// param - строка прогноза вида: 1676538000 -4 -3 2 2 0 2 2 4
 	const myArray = param.split(" "); // [ "1678093200", "-1.09", "-0.75", "0.41", "6.27", "0.35", "-0.61", "3.14", "1.09" ]
-	console.log("myArray:", myArray);
+	//console.log("myArray:", myArray);
 	last_forecast[keys[key]]=[];
 	myArray.forEach((element, index) => {
 	  if ((key==0) && (index==0)) last_forecast["today_utc"] = element;
@@ -433,7 +433,7 @@ function create_chart_clouds_precipitation(renderTo) {
 	},
 	series: [
 	  {
-		name: 'Количество осадков (дождь/снег)',
+		name: 'Количество осадков (дождь и снег вместе)',
 		type: 'column',
 		yAxis: 0,
 		pointInterval: 86400000,
