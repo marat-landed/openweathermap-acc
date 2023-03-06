@@ -37,8 +37,9 @@ function plot_last_forecast(archive) {
 	last_forecast[keys[key]]=[];
 	myArray.forEach((element, index) => {
 	  if ((key==0) && (index==0)) last_forecast["today_utc"] = element;
-	  if (keys[key]=="forecast/weather/icon") let val = element; 
-	  else let val = Number(element);
+	  let val;
+	  if (keys[key]=="forecast/weather/icon") val = element; 
+	  else val = Number(element);
       //if ((keys[key]=="precipitation") || (keys[key]=="wind_speed")) val = val/100.;
       if (index>0) last_forecast[keys[key]].push(val);	  
 	})
