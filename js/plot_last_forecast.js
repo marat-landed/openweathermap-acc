@@ -6,6 +6,18 @@ function plot_last_forecast(archive) {
   // Из архива всех прогнозов необходимо сформировать запись вида:
   // {"today_utc": 1676538000,"temp_max":[23,23,23,23,23,23,23,23],"temp_min":[12,12,12,23,23,23,23,23],
   //  "pressure"...,"clouds"...,"precipitation"...,"wind_speed"...,"wind_direct"...,"weather_icon_num"...}
+  
+  // Получаем объект вида:
+  //"forecast/clouds": "1678093200 30.00 76.00 100.00 100.00 100.00 36.00 100.00 52.00"
+​  //"forecast/humidity": "1678093200 35.00 69.00 76.00 68.00 85.00 35.00 57.00 46.00"
+​  //"forecast/pop": "1678093200 0.20 0.34 0.91 0.59 1.00 0.00 1.00 0.99"
+​  //"forecast/pressure": "1678093200 1007.00 1010.00 1010.00 1003.00 1002.00 1010.00 1001.00 1014.00"
+​  //"forecast/temp/max": "1678093200 3.62 5.22 10.82 14.04 8.30 8.66 8.70 7.37"
+​  //"forecast/temp/min": "1678093200 -1.09 -0.75 0.41 6.27 0.35 -0.61 3.14 1.09"
+​  //"forecast/weather/icon": "1678093200 10d 10d 10d 10d 10d 10d 10d 10d 10d 10d 03d 03d 13d 13d 13d 13d"
+​  //"forecast/wind_deg": "1678093200 263.00 185.00 197.00 226.00 301.00 195.00 206.00 286.00"
+​  //"forecast/wind_speed": "1678093200 5.17 5.67 6.30 6.97 6.66 8.27 7.16 4.94"
+
   let last_forecast = {};
   
   console.log("archive:");
@@ -24,7 +36,8 @@ function plot_last_forecast(archive) {
 	//console.log(param[0]);
 	// param[i] - строка прогноза вида: 1676538000 -4 -3 2 2 0 2 2 4
 	// Прогнозы идут в порядке: самый старый,..., самый новый.
-	const myArray = param[param.length-1].split(" ");
+	//const myArray = param[param.length-1].split(" ");
+	const myArray = param.split(" ");
 	console.log("myArray:");
 	console.log(myArray);
 	last_forecast[keys[key]]=[];
