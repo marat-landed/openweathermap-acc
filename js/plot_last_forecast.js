@@ -139,7 +139,7 @@ function plotChart(jsonValue) {
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} else if (keys[key]=="precipitation") { // precipitation
+	} else if (keys[key]=="forecast/precipitation") { // precipitation
 	  chartClPr.series[0].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
