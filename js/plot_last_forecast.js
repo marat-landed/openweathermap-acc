@@ -250,15 +250,16 @@ function create_chart_temp(renderTo) {
           style: {
             color: '#FF0000',
             textOutline: 'none',
-            fontWeight: 'normal',
+            fontWeight: 'normal'
           },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
 		},
 		tooltip: {
 			//valueDecimals: 2,
 			valueSuffix: ' °C'
-		},
-		formatter: function () {
-		  return Highcharts.numberFormat(this.y,1);
+			// pointFormat: 'Value: {point.y:.2f} mm' // Выводит 2 знака после запятой при наведении мыши: Value: 106.40 mm
 		}
 	  },
 	  {
