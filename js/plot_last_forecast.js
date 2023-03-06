@@ -21,8 +21,7 @@ function plot_last_forecast(archive) {
 
   let last_forecast = {};
   
-  console.log("archive:");
-  console.log(archive);
+  console.log("archive:",archive);
   
   var keys = Object.keys(archive);
   for (var key = 0; key < keys.length; key++){
