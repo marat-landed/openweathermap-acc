@@ -24,8 +24,6 @@ function plot_last_forecast(archive) {
   console.log("archive:");
   console.log(archive);
   
-  return;
-  
   var keys = Object.keys(archive);
   for (var key = 0; key < keys.length; key++){
 	var param = archive[keys[key]];
