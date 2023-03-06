@@ -108,7 +108,7 @@ function plotChart(jsonValue) {
 		  fillColor: 'red',
           radius: 5,
           //symbol: 'url(http://openweathermap.org/img/wn/10d.png)'
-		  symbol: 'url(http://openweathermap.org/img/w/' + weather_icon_str + '.png)'
+		  symbol: 'url(https://openweathermap.org/img/w/' + weather_icon_str + '.png)'
         };
 		var serie1 =  {
 		  y: y1,         
