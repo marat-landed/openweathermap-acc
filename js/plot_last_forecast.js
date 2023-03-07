@@ -4,6 +4,7 @@ var chartT, // 'chart-temperature'
     chartWC, //'div-chart-weather-clouds'
 	chartHPP, // 'div-chart-humid-pop-precip'
 	chartPW; // 'div-chart-wind-press'
+	
 function plot_last_forecast(archive) {
   // Из архива всех прогнозов необходимо сформировать запись вида:
   // {"today_utc": 1676538000,"temp_max":[23,23,23,23,23,23,23,23],"temp_min":[12,12,12,23,23,23,23,23],
@@ -84,7 +85,6 @@ function plotChart(jsonValue) {
   create_chart_weather_clouds('div-chart-weather-clouds'); // chartWC: 'div-chart-weather-clouds'
   create_chart_humid_pop_precip('div-chart-humid-pop-precip'); // chartHPP: 'div-chart-humid-pop-precip'
   create_chart_press_wind('div-chart-wind-press'); // chartWP: 'div-chart-wind-press'
-  //create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
   // 0: 'today_utc', 1: 'temp_max', 2: 'temp_min', 3: 'pressure', 4: 'clouds', 5: 'precipitation',
@@ -703,7 +703,6 @@ function create_chart_press_wind(renderTo) {
 		  enable: false
 		}
 	  },
-	  ,
 	  column: {
         pointPlacement: 'on'
       }
