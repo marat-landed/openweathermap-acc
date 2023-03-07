@@ -430,7 +430,7 @@ function create_chart_humid_pop_precip(renderTo) {
 	  },
 	  {
 		name: 'Количество осадков',
-		type: 'line', //'column',
+		type: 'column', //'column', 'line'
 		yAxis: 1,
 		pointInterval: 86400000,
 		color: '#68CFE8',
