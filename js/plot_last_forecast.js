@@ -627,12 +627,6 @@ function create_chart_press_wind(renderTo) {
       xDateFormat: '%d-%m-%Y',
       shared: true,
 	  crosshairs: true,
-	  //positioner: function () {
-      //  return { x: 80, y: 50 };
-      //},
-      shadow: true,
-      borderWidth: 0,
-      backgroundColor: 'rgba(255,255,255,0.8)'
     },
 	series: [
 	  {
@@ -673,7 +667,7 @@ function create_chart_press_wind(renderTo) {
             valueSuffix: ' м/с',
 			valueDecimals: 1,
 			pointFormatter: function() {
-			  return '<span style="color:' + this.color + '">● </span>' + 'Направление ветра: <b>' + this.rotation + '° (' + windDirLang(this.rotation) + ')</b>'
+			  return '<span style="color:' + this.color + '">● </span>' + 'Направление ветра: <b>' + this.rotation + '° (' + windDirLang(this.rotation) + ')</b><br/>'
 		  }
         },
 		dataLabels: {
@@ -694,7 +688,7 @@ function create_chart_press_wind(renderTo) {
 		pointInterval: 86400000,
 		yAxis: 1,
 		tooltip: {
-            valueSuffix: ' гПа',
+          valueSuffix: ' гПа',
         },
 		//color: '#CCCCCC',
 		color: 'rgba(0, 0, 0, 0.10)',
@@ -710,9 +704,9 @@ function create_chart_press_wind(renderTo) {
             color: 'black',
             textOutline: 'none',
             fontWeight: 'normal',
-          },
-		},
-	  },
+          }
+		}
+	  }
 	]
   });
 }
