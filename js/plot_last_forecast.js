@@ -691,7 +691,7 @@ function create_chart_press_wind(renderTo) {
           valueSuffix: ' гПа',
         },
 		//color: '#CCCCCC',
-		color: color: Highcharts.getOptions().colors[6],
+		color: Highcharts.getOptions().colors[6],
 		//borderColor: '#000000',
 		marker: {
 		  symbol: 'circle',
