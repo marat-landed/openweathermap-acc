@@ -238,7 +238,7 @@ function create_chart_temp(renderTo) {
 		type: 'line',
 		pointInterval: 24 * 3600 * 1000, // one day
 		yAxis: 0,
-		color: '#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
+		color: Highcharts.getOptions().colors[8],'#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
@@ -266,7 +266,7 @@ function create_chart_temp(renderTo) {
 		type: 'line',
 		pointInterval: 86400000,
 		yAxis: 0,
-		color: '#0000FF', //Highcharts.getOptions().colors[0], //'#0000FF',
+		color: Highcharts.getOptions().colors[4], //'#0000FF', //Highcharts.getOptions().colors[0], //'#0000FF',
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
@@ -418,14 +418,14 @@ function create_chart_humid_pop_precip(renderTo) {
 		type: 'line',
 		yAxis: 0,
 		pointInterval: 86400000,
-		color: Highcharts.getOptions().colors[3],//'#B200FF',
+		color: Highcharts.getOptions().colors[5],//'#B200FF',
 		tooltip: {
             valueSuffix: ' %',
         },
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
-		  fillColor: Highcharts.getOptions().colors[3]//'#B200FF',
+		  fillColor: Highcharts.getOptions().colors[5]//'#B200FF',
 		},
 	  },
 	  {
