@@ -407,6 +407,7 @@ function create_chart_temp_probe(renderTo) {
 	  gridLineWidth: 1,
 	},
 	yAxis: [
+	/*
 	  { // Primary yAxis
 	    title: {
           text: 'Давление, гПа',
@@ -426,6 +427,7 @@ function create_chart_temp_probe(renderTo) {
 		visible: false,
 		
       },
+	  */
 	  {
 	    title: {
 		  text: 'Температура, °C'
