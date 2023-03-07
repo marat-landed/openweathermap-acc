@@ -120,15 +120,15 @@ function plotChart(jsonValue) {
 	});
 				
 	if (keys[key]=="forecast/temp/max") { // temp_max
-	  //chartT.series[0].update({
-	  //  pointStart: pointStart_curr,
-	//data: data //data.data
-	  //})	
+	  chartT.series[0].update({
+	    pointStart: pointStart_curr,
+		data: data //data.data
+	  })	
 	} else if (keys[key]=="forecast/temp/min") { // temp_min
-	  //chartT.series[1].update({
-		//pointStart: pointStart_curr,
-		//data: data //data.data
-	  //})	
+	  chartT.series[1].update({
+		pointStart: pointStart_curr,
+		data: data //data.data
+	  })	
 	} 
 	/*else if (keys[key]=="forecast/pressure") { // pressure
 	  chartT.series[0].update({
@@ -312,176 +312,6 @@ function create_chart_temp(renderTo) {
   });
 }
 
-function create_chart_temp_probe(renderTo) {
-  chartT = new Highcharts.chart(renderTo,{	
-    //chart: {
-    //  type: 'spline',
-    //  inverted: false
-	//},
-	title: {
-	  //text: "Temperature",
-	  text: 'Температура, давление, ветер'
-	  //align: 'left'
-	},
-	time: {
-	  //useUTC: false, //timezone: 'Europe/Helsinki'
-	},
-	plotOptions: {
-        series: {
-            pointInterval: 24 * 3600 * 1000 // one day
-        }
-    },
-	legend: {
-      layout: "horizontal",
-      align: "left",
-      useHTML: true,
-      maxHeight: 60,
-      labelFormatter: function () {
-        let color = hexToRgb(this.color);
-        if (!this.visible) {
-          color = { r: 204, g: 204, b: 204 };
-        }
-        var symbol = `<span class="chartSymbol" style="background: rgba(${color.r},${color.g},${color.b},0.1) 0% 0% no-repeat padding-box;border: 4px solid rgba(${color.r},${color.g},${color.b},.5);"></span>`;
-        return `${symbol} ${this.name}`;
-      },
-    },
-	series: [
-	  {
-		name: 'Tmax',
-		type: 'line',
-		pointInterval: 24 * 3600 * 1000, // one day
-		yAxis: 0,
-		color: '#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: '#FF0000'//'#FF0000',
-		},
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: '#FF0000',
-            textOutline: 'none',
-            fontWeight: 'normal'
-          },
-		  formatter: function () {
-			return Highcharts.numberFormat(this.y,1);
-		  }
-		},
-		tooltip: {
-			//valueDecimals: 2,
-			valueSuffix: ' °C'
-			// pointFormat: 'Value: {point.y:.2f} mm' // Выводит 2 знака после запятой при наведении мыши: Value: 106.40 mm
-		}
-	  },
-	  {
-		name: 'Tmin',
-		type: 'line',
-		pointInterval: 86400000,
-		yAxis: 0,
-		color: '#0000FF', //Highcharts.getOptions().colors[0], //'#0000FF',
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: '#0000FF' //'#0000FF',
-		},
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: '#0000FF',
-            textOutline: 'none',
-            fontWeight: 'normal',
-          },
-		  formatter: function () {
-			return Highcharts.numberFormat(this.y,1);
-		  }
-		},
-		tooltip: {
-          valueSuffix: ' °C',
-        }
-	  }
-	],
-	xAxis: {
-	  type: 'datetime',
-	  dateTimeLabelFormats: { day: '%d.%m' },
-	  gridLineWidth: 1,
-	},
-	yAxis: [
-	/*
-	  { // Primary yAxis
-	    title: {
-          text: 'Давление, гПа',
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        },
-        labels: {
-          //format: '{value}°C',
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        },
-		alignTicks: true,
-        //tickInterval: 15,
-		//opposite: true,
-		visible: false,
-		
-      },
-	  */
-	  {
-	    title: {
-		  text: 'Температура, °C'
-	    },
-	    alignTicks: false,
-        tickInterval: 5,
-	  },
-	  /*
-      {
-	    title: {
-          text: 'Скорость, м/с',
-          style: {
-            color: Highcharts.getOptions().colors[7]
-          }
-        },
-        labels: {
-          style: {
-            color: Highcharts.getOptions().colors[7]
-          }
-        },
-		min: 0,
-		alignTicks: false,
-		visible: false
-      }	
-*/	  
-	 ],
-	credits: {
-	  enabled: false
-	},
-	plotOptions: {
-	  spline: {
-		marker: {
-		  enable: false
-		}
-	  }
-	},
-	legend: {
-	  itemStyle: {
-	    fontWeight: 'normal'
-	  }
-    },
-	tooltip: {
-      xDateFormat: '%d-%m-%Y',
-      shared: true,
-	  crosshairs: true,
-	  //positioner: function () {
-      //  return { x: 80, y: 50 };
-      //},
-      shadow: true,
-      borderWidth: 0,
-      backgroundColor: 'rgba(255,255,255,0.8)'
-    }
-  });
-}
 
 function create_chart_temp_old(renderTo) {
   chartT = new Highcharts.chart(renderTo,{	
