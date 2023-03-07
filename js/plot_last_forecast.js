@@ -3,8 +3,7 @@
 var chartT, // 'chart-temperature'
     chartWC, //'div-chart-weather-clouds'
 	chartHPP, // 'div-chart-humid-pop-precip'
-	chartPW, // 'div-chart-wind-press'
-    chartClPr; // 'chart-clouds-precipitation'
+	chartPW; // 'div-chart-wind-press'
 function plot_last_forecast(archive) {
   // Из архива всех прогнозов необходимо сформировать запись вида:
   // {"today_utc": 1676538000,"temp_max":[23,23,23,23,23,23,23,23],"temp_min":[12,12,12,23,23,23,23,23],
@@ -84,7 +83,7 @@ function plotChart(jsonValue) {
   create_chart_temp('div-chart-temperature'); // chartT: 'div-chart-temperature'
   create_chart_weather_clouds('div-chart-weather-clouds'); // chartWC: 'div-chart-weather-clouds'
   create_chart_humid_pop_precip('div-chart-humid-pop-precip'); // chartHPP: 'div-chart-humid-pop-precip'
-  create_chart_wind_press('div-chart-wind-press'); // chartWP: 'div-chart-wind-press'
+  create_chart_press_wind('div-chart-wind-press'); // chartWP: 'div-chart-wind-press'
   //create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
@@ -540,7 +539,7 @@ function create_chart_humid_pop_precip(renderTo) {
 }
 
 // Create Temperature Chart
-function create_chart_wind_press(renderTo) {
+function create_chart_press_wind(renderTo) {
   chartPW = new Highcharts.chart(renderTo,{	
     //chart: {
     //  type: 'spline',
@@ -675,7 +674,7 @@ function create_chart_wind_press(renderTo) {
 		alignTicks: true,
         //tickInterval: 15,
 		//opposite: true,
-		visible: false,
+		visible: true,
 		
       },
       {
@@ -703,7 +702,11 @@ function create_chart_wind_press(renderTo) {
 		marker: {
 		  enable: false
 		}
-	  }
+	  },
+	  ,
+	  column: {
+        pointPlacement: 'on'
+      }
 	},
 	legend: {
 	  itemStyle: {
@@ -720,126 +723,6 @@ function create_chart_wind_press(renderTo) {
       shadow: true,
       borderWidth: 0,
       backgroundColor: 'rgba(255,255,255,0.8)'
-    }
-  });
-}
-
-// Create Clouds - Precipitation
-function create_chart_clouds_precipitation(renderTo) {
-  chartClPr = new Highcharts.chart(renderTo,{	
-    chart: {
-      type: 'spline',
-      inverted: false,
-	},
-	title: {
-	  text: "Облачность, осадки",
-	  //align: 'left'
-	},
-	series: [
-	  {
-		name: 'Количество осадков (дождь и снег вместе)',
-		type: 'column',
-		yAxis: 0,
-		pointInterval: 86400000,
-		color: '#68CFE8',
-		tooltip: {
-            valueSuffix: ' мм',
-			//valueDecimals: 1,
-        },
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  color: '#68CFE8',
-		},
-		dataLabels: {
-          enabled: true,
-          filter: {
-            operator: '>',
-            property: 'y',
-            value: 0
-          },
-          style: {
-            color: 'black',
-            textOutline: 'none',
-            fontWeight: 'normal',
-          },
-		  formatter: function () {
-			return Highcharts.numberFormat(this.y,1);
-		  }
-		}
-	  },
-	  {
-		name: 'Облачность',
-		type: 'line',
-		yAxis: 1,
-		pointInterval: 86400000,
-		color: Highcharts.getOptions().colors[0],//'#B200FF',
-		tooltip: {
-            valueSuffix: ' %',
-        },
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: Highcharts.getOptions().colors[0]//'#B200FF',
-		},
-	  },
-	],
-	xAxis: {
-	  type: 'datetime',
-	  dateTimeLabelFormats: { day: '%d.%m' },
-	  gridLineWidth: 1,
-	},
-	yAxis: [
-	  { // Primary yAxis
-	    title: {
-            text: 'Осадки (дождь/снег), мм',
-            style: {
-                color: Highcharts.getOptions().colors[7]
-            }
-        },
-        labels: {
-            //format: '{value} mm',
-            style: {
-                color: Highcharts.getOptions().colors[7]
-            }
-        },
-		min: 0,
-		alignTicks: false,
-        opposite: true,
-		visible: false
-      },
-	  { // Secondary yAxis
-	    title: {
-          text: 'Облачность, %'
-        },
-		style: {
-            color: Highcharts.getOptions().colors[1]
-        },
-		max: 100,
-		min: 0,
-		alignTicks: false,
-        tickInterval: 20,
-      }
-	],
-	credits: {
-	  enabled: false
-	},
-	plotOptions: {
-	  spline: {
-		marker: {
-		  enable: false
-		}
-	  }
-	},
-	legend: {
-	  itemStyle: {
-	    fontWeight: 'normal'
-	  }
-    },
-	tooltip: {
-      xDateFormat: '%d-%m-%Y',
-      shared: true,
-	  crosshairs: true,
     }
   });
 }
