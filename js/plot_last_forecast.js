@@ -168,12 +168,12 @@ function plotChart(jsonValue) {
 	  })
 	}
 	else if (keys[key]=="forecast/wind_speed") {
-	  chartWC.series[1].update({
+	  chartPW.series[1].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
 	} else if (keys[key]=="forecast/wind_deg") {
-	  chartWC.series[2].update({
+	  chartPW.series[2].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
