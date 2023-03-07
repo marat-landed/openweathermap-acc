@@ -521,7 +521,10 @@ function create_chart_humid_pop_precip(renderTo) {
 		marker: {
 		  enable: false
 		}
-	  }
+	  },
+	  column: {
+        pointPlacement: 'on'
+      }
 	},
 	legend: {
 	  itemStyle: {
