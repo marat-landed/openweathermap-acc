@@ -77,7 +77,7 @@ function plotChart(jsonValue) {
   var year = date.getFullYear();
   document.getElementById("forecast_date").textContent = day + '-' + month + '-' + year;
   
-  create_chart_temp('div-chart-temperature');
+  create_chart_temp_old('div-chart-temperature');
   create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
