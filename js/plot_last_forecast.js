@@ -77,7 +77,7 @@ function plotChart(jsonValue) {
   var year = date.getFullYear();
   document.getElementById("forecast_date").textContent = day + '-' + month + '-' + year;
   
-  create_chart_temp('chart-temperature');
+  create_chart_temp('div-chart-temperature');
   create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
@@ -129,12 +129,14 @@ function plotChart(jsonValue) {
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })	
-	} else if (keys[key]=="forecast/pressure") { // pressure
+	} 
+	/*else if (keys[key]=="forecast/pressure") { // pressure
 	  chartT.series[0].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} else if (keys[key]=="forecast/clouds") { // clouds
+	}*/ 
+	else if (keys[key]=="forecast/clouds") { // clouds
 	  chartClPr.series[1].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
@@ -144,7 +146,8 @@ function plotChart(jsonValue) {
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} else if (keys[key]=="forecast/wind_speed") {
+	} 
+	/*else if (keys[key]=="forecast/wind_speed") {
 	  chartT.series[3].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
@@ -155,6 +158,7 @@ function plotChart(jsonValue) {
 		data: data //data.data
 	  })
 	}
+	*/
 	data = [];
   }
   chartT.yAxis[0].setExtremes(chartT.yAxis[0].dataMin, chartT.yAxis[0].dataMax);
@@ -175,7 +179,139 @@ function hexToRgb(hex) {
     : null;
 }
 // Create Temperature Chart
+// Create Temperature Chart
 function create_chart_temp(renderTo) {
+  chartT = new Highcharts.chart(renderTo,{	
+    //chart: {
+    //  type: 'spline',
+    //  inverted: false
+	//},
+	title: {
+	  //text: "Temperature",
+	  text: 'Температура'
+	  //align: 'left'
+	},
+	time: {
+	  //useUTC: false, //timezone: 'Europe/Helsinki'
+	},
+	plotOptions: {
+        series: {
+            pointInterval: 24 * 3600 * 1000 // one day
+        }
+    },
+	legend: {
+      layout: "horizontal",
+      align: "left",
+      useHTML: true,
+      maxHeight: 60,
+      labelFormatter: function () {
+        let color = hexToRgb(this.color);
+        if (!this.visible) {
+          color = { r: 204, g: 204, b: 204 };
+        }
+        var symbol = `<span class="chartSymbol" style="background: rgba(${color.r},${color.g},${color.b},0.1) 0% 0% no-repeat padding-box;border: 4px solid rgba(${color.r},${color.g},${color.b},.5);"></span>`;
+        return `${symbol} ${this.name}`;
+      },
+    },
+	series: [
+	  {
+		name: 'Tmax',
+		type: 'line',
+		pointInterval: 24 * 3600 * 1000, // one day
+		yAxis: 1,
+		color: '#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  fillColor: '#FF0000'//'#FF0000',
+		},
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: '#FF0000',
+            textOutline: 'none',
+            fontWeight: 'normal'
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
+		},
+		tooltip: {
+			//valueDecimals: 2,
+			valueSuffix: ' °C'
+			// pointFormat: 'Value: {point.y:.2f} mm' // Выводит 2 знака после запятой при наведении мыши: Value: 106.40 mm
+		}
+	  },
+	  {
+		name: 'Tmin',
+		type: 'line',
+		pointInterval: 86400000,
+		yAxis: 1,
+		color: '#0000FF', //Highcharts.getOptions().colors[0], //'#0000FF',
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  fillColor: '#0000FF' //'#0000FF',
+		},
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: '#0000FF',
+            textOutline: 'none',
+            fontWeight: 'normal',
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
+		},
+		tooltip: {
+          valueSuffix: ' °C',
+        }
+	  }
+	],
+	xAxis: {
+	  type: 'datetime',
+	  dateTimeLabelFormats: { day: '%d.%m' },
+	  gridLineWidth: 1,
+	},
+	yAxis: [
+	  {
+	    title: {
+		  text: 'Температура, °C'
+	    },
+	    alignTicks: false,
+        tickInterval: 5,
+	  }
+	 ],
+	credits: {
+	  enabled: false
+	},
+	plotOptions: {
+	  spline: {
+		marker: {
+		  enable: false
+		}
+	  }
+	},
+	legend: {
+	  itemStyle: {
+	    fontWeight: 'normal'
+	  }
+    },
+	tooltip: {
+      xDateFormat: '%d-%m-%Y',
+      shared: true,
+	  crosshairs: true,
+	  //positioner: function () {
+      //  return { x: 80, y: 50 };
+      //},
+      shadow: true,
+      borderWidth: 0,
+      backgroundColor: 'rgba(255,255,255,0.8)'
+    }
+  });
+}
+function create_chart_temp_old(renderTo) {
   chartT = new Highcharts.chart(renderTo,{	
     //chart: {
     //  type: 'spline',
@@ -541,114 +677,4 @@ function create_chart_clouds_precipitation(renderTo) {
 }
 
 // Create Wind Chart
-function create_chart_wind(renderTo) {
-  chartW = new Highcharts.chart(renderTo,{	
-    title: {
-      text: 'Ветер'
-    },
-    xAxis: {
-	  type: 'datetime',
-	  dateTimeLabelFormats: { day: '%d.%m' },
-	  gridLineWidth: 1,
-	},
-	yAxis: {
-	    title: {
-          text: 'Скорость, м/с',
-          style: {
-            color: Highcharts.getOptions().colors[7]
-          }
-        },
-        labels: {
-          style: {
-            color: Highcharts.getOptions().colors[7]
-          }
-        },
-		min: 0,
-		alignTicks: false
-    },
-	tooltip: {
-      valueSuffix: ' м/с'
-    },
-    series: [{
-        type: 'line',
-		keys: ['y', 'rotation'],
-		name: 'Скорость ветра',
-        id: 'wind-speed',
-        color: Highcharts.getOptions().colors[0],
-		pointInterval: 86400000,
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: Highcharts.getOptions().colors[0]
-		},
-        tooltip: {
-            valueSuffix: ' м/с',
-			pointFormatter(){
-			  return this.series.name + ": " + this.y + " m/s " + this.rotation + " °"
-			}
-        }
-    }, {
-        type: 'windbarb',
-		//keys: ['y', 'rotation'],
-        onSeries: 'wind-speed',
-        name: 'Направление ветра',
-		color: Highcharts.getOptions().colors[1],
-		pointInterval: 86400000,
-        //showInLegend: false,
-		//tooltip: {
-    	  //pointFormatter(){
-      	    //return this.series.name + ": " + this.y
-          //}
-        //}
-    }],
-	plotOptions: {
-	  spline: {
-		marker: {
-		  enable: false
-		}
-	  }
-	},
-	credits: {
-	  enabled: false
-	},
-	legend: {
-	  itemStyle: {
-	    fontWeight: 'normal'
-	  }
-	},
-	tooltip: {
-      xDateFormat: '%d-%m-%Y',
-      //shared: true
-    }
-  });
-}
 
-function icon_num_to_str(icon_num) {
-  var icon_str;
-  switch (icon_num) {
-  case 1:
-    icon_str = "01d";
-    break;
-  case 2:
-    icon_str = "02d";
-    break;
-  case 3:
-    icon_str = "03d";
-    break;
-  case 4:
-    icon_str = "04d";
-    break;
-  case 9:
-    icon_str = "09d";
-    break;
-  case 10:
-    icon_str = "10d";
-    break;
-  case 13:
-    icon_str = "13d";
-	break;
-  case 50:
-    icon_str = "50d";
-  }
-  return icon_str;
-}
