@@ -411,6 +411,66 @@ function create_chart_humid_pop_precip(renderTo) {
 	  text: "Вероятность осадков, количество осадков, влажность",
 	  //align: 'left'
 	},
+	xAxis: {
+	  type: 'datetime',
+	  dateTimeLabelFormats: { day: '%d.%m' },
+	  gridLineWidth: 1,
+	},
+	yAxis: [
+	  { // Secondary yAxis
+	    title: {
+          text: 'Вероятность, влажность, %'
+        },
+		style: {
+            color: Highcharts.getOptions().colors[1]
+        },
+		max: 100,
+		min: 0,
+		alignTicks: false,
+        tickInterval: 20,
+      },
+	  { // Primary yAxis
+	    title: {
+            text: 'Осадки (дождь/снег), мм',
+            style: {
+                color: Highcharts.getOptions().colors[7]
+            }
+        },
+        labels: {
+            //format: '{value} mm',
+            style: {
+                color: Highcharts.getOptions().colors[7]
+            }
+        },
+		min: 0,
+		alignTicks: false,
+        opposite: true,
+		visible: false
+      }
+	],
+	credits: {
+	  enabled: false
+	},
+	plotOptions: {
+	  spline: {
+		marker: {
+		  enable: false
+		}
+	  },
+	  column: {
+        pointPlacement: 'on'
+      }
+	},
+	legend: {
+	  itemStyle: {
+	    fontWeight: 'normal'
+	  }
+    },
+	tooltip: {
+      xDateFormat: '%d-%m-%Y',
+      shared: true,
+	  crosshairs: true,
+    },
 	series: [
 	  {
 		name: 'Вероятность осадков',
@@ -472,69 +532,9 @@ function create_chart_humid_pop_precip(renderTo) {
 		  symbol: 'circle',
 		  radius: 3,
 		  fillColor: Highcharts.getOptions().colors[0]//'#B200FF',
-		},
-	  },
-	],
-	xAxis: {
-	  type: 'datetime',
-	  dateTimeLabelFormats: { day: '%d.%m' },
-	  gridLineWidth: 1,
-	},
-	yAxis: [
-	  { // Secondary yAxis
-	    title: {
-          text: 'Вероятность, влажность, %'
-        },
-		style: {
-            color: Highcharts.getOptions().colors[1]
-        },
-		max: 100,
-		min: 0,
-		alignTicks: false,
-        tickInterval: 20,
-      },
-	  { // Primary yAxis
-	    title: {
-            text: 'Осадки (дождь/снег), мм',
-            style: {
-                color: Highcharts.getOptions().colors[7]
-            }
-        },
-        labels: {
-            //format: '{value} mm',
-            style: {
-                color: Highcharts.getOptions().colors[7]
-            }
-        },
-		min: 0,
-		alignTicks: false,
-        opposite: true,
-		visible: false
-      }
-	],
-	credits: {
-	  enabled: false
-	},
-	plotOptions: {
-	  spline: {
-		marker: {
-		  enable: false
 		}
-	  },
-	  column: {
-        pointPlacement: 'on'
-      }
-	},
-	legend: {
-	  itemStyle: {
-	    fontWeight: 'normal'
 	  }
-    },
-	tooltip: {
-      xDateFormat: '%d-%m-%Y',
-      shared: true,
-	  crosshairs: true,
-    }
+	]
   });
 }
 
