@@ -561,6 +561,7 @@ function create_chart_press_wind(renderTo) {
       }
     },
 	legend: {
+		/*
       layout: "horizontal",
       align: "left",
       useHTML: true,
@@ -573,6 +574,7 @@ function create_chart_press_wind(renderTo) {
         var symbol = `<span class="chartSymbol" style="background: rgba(${color.r},${color.g},${color.b},0.1) 0% 0% no-repeat padding-box;border: 4px solid rgba(${color.r},${color.g},${color.b},.5);"></span>`;
         return `${symbol} ${this.name}`;
       },
+	  */
 	  itemStyle: {
 	    fontWeight: 'normal'
 	  }
