@@ -450,6 +450,7 @@ function create_chart_temp_probe(renderTo) {
 		}
       },
 	  */
+	  /*
 	  { 
 	    name: 'Скорость ветра',
         type: 'line',
@@ -482,6 +483,7 @@ function create_chart_temp_probe(renderTo) {
 		  }
 		}
       }
+	  */
 	],
 	xAxis: {
 	  type: 'datetime',
