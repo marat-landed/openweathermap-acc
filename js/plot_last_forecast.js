@@ -120,12 +120,12 @@ function plotChart(jsonValue) {
 	});
 				
 	if (keys[key]=="forecast/temp/max") { // temp_max
-	  chartT.series[1].update({
+	  chartT.series[0].update({
 	    pointStart: pointStart_curr,
 		data: data //data.data
 	  })	
 	} else if (keys[key]=="forecast/temp/min") { // temp_min
-	  chartT.series[2].update({
+	  chartT.series[1].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })	
@@ -282,7 +282,7 @@ function create_chart_temp(renderTo) {
 	    alignTicks: false,
         tickInterval: 5,
 	  }
-	 ],
+	],
 	credits: {
 	  enabled: false
 	},
@@ -311,6 +311,7 @@ function create_chart_temp(renderTo) {
     }
   });
 }
+
 function create_chart_temp_old(renderTo) {
   chartT = new Highcharts.chart(renderTo,{	
     //chart: {
