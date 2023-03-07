@@ -633,7 +633,7 @@ function create_chart_press_wind(renderTo) {
 		name: 'Давление',
 		type: 'column',
 		pointInterval: 86400000,
-		yAxis: 0,
+		//yAxis: 0,
 		tooltip: {
           valueSuffix: ' гПа',
         },
