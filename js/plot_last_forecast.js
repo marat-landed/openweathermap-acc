@@ -120,15 +120,15 @@ function plotChart(jsonValue) {
 	});
 				
 	if (keys[key]=="forecast/temp/max") { // temp_max
-	  chartT.series[0].update({
-	    pointStart: pointStart_curr,
-		data: data //data.data
-	  })	
+	  //chartT.series[0].update({
+	  //  pointStart: pointStart_curr,
+	//data: data //data.data
+	  //})	
 	} else if (keys[key]=="forecast/temp/min") { // temp_min
-	  chartT.series[1].update({
-		pointStart: pointStart_curr,
-		data: data //data.data
-	  })	
+	  //chartT.series[1].update({
+		//pointStart: pointStart_curr,
+		//data: data //data.data
+	  //})	
 	} 
 	/*else if (keys[key]=="forecast/pressure") { // pressure
 	  chartT.series[0].update({
