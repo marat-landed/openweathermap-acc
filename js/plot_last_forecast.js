@@ -548,9 +548,9 @@ function create_chart_press_wind(renderTo) {
 	  //useUTC: false, //timezone: 'Europe/Helsinki'
 	},
 	plotOptions: {
-      series: {
-        pointInterval: 24 * 3600 * 1000 // one day
-      },
+      //series: {
+        //pointInterval: 24 * 3600 * 1000 // one day
+      //},
 	  spline: {
 		marker: {
 		  enable: false
@@ -578,6 +578,62 @@ function create_chart_press_wind(renderTo) {
 	  itemStyle: {
 	    fontWeight: 'normal'
 	  }
+    },
+	xAxis: {
+	  type: 'datetime',
+	  dateTimeLabelFormats: { day: '%d.%m' },
+	  gridLineWidth: 1,
+	},
+	yAxis: [
+	  { // Primary yAxis
+	    title: {
+          text: 'Давление, гПа',
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          }
+        },
+        labels: {
+          //format: '{value}°C',
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          }
+        },
+		alignTicks: true,
+        //tickInterval: 15,
+		//opposite: true,
+		visible: false,
+		
+      },
+      {
+	    title: {
+          text: 'Скорость, м/с',
+          style: {
+            color: Highcharts.getOptions().colors[7]
+          }
+        },
+        labels: {
+          style: {
+            color: Highcharts.getOptions().colors[7]
+          }
+        },
+		min: 0,
+		alignTicks: false,
+		visible: true
+      }	  
+	 ],
+	credits: {
+	  enabled: false
+	},
+	tooltip: {
+      xDateFormat: '%d-%m-%Y',
+      shared: true,
+	  crosshairs: true,
+	  //positioner: function () {
+      //  return { x: 80, y: 50 };
+      //},
+      shadow: true,
+      borderWidth: 0,
+      backgroundColor: 'rgba(255,255,255,0.8)'
     },
 	series: [
 	  {
@@ -658,62 +714,6 @@ function create_chart_press_wind(renderTo) {
 		  }
 		}
       }
-	],
-	xAxis: {
-	  type: 'datetime',
-	  dateTimeLabelFormats: { day: '%d.%m' },
-	  gridLineWidth: 1,
-	},
-	yAxis: [
-	  { // Primary yAxis
-	    title: {
-          text: 'Давление, гПа',
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        },
-        labels: {
-          //format: '{value}°C',
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        },
-		alignTicks: true,
-        //tickInterval: 15,
-		//opposite: true,
-		visible: true,
-		
-      },
-      {
-	    title: {
-          text: 'Скорость, м/с',
-          style: {
-            color: Highcharts.getOptions().colors[7]
-          }
-        },
-        labels: {
-          style: {
-            color: Highcharts.getOptions().colors[7]
-          }
-        },
-		min: 0,
-		alignTicks: false,
-		visible: false
-      }	  
-	 ],
-	credits: {
-	  enabled: false
-	},
-	tooltip: {
-      xDateFormat: '%d-%m-%Y',
-      shared: true,
-	  crosshairs: true,
-	  //positioner: function () {
-      //  return { x: 80, y: 50 };
-      //},
-      shadow: true,
-      borderWidth: 0,
-      backgroundColor: 'rgba(255,255,255,0.8)'
-    }
+	]
   });
 }
