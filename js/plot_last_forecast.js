@@ -346,33 +346,6 @@ function create_chart_temp_probe(renderTo) {
       },
     },
 	series: [
-	/*
-	  {
-		name: 'Давление',
-		type: 'column',
-		pointInterval: 86400000,
-		yAxis: 0,
-		tooltip: {
-            valueSuffix: ' гПа',
-        },
-		//color: '#CCCCCC',
-		color: 'rgba(0, 0, 0, 0.10)',
-		borderColor: '#000000',
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: '#CCCCCC',
-		},
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: 'black',
-            textOutline: 'none',
-            fontWeight: 'normal',
-          },
-		},
-	  },
-	  */
 	  {
 		name: 'Tmax',
 		type: 'line',
@@ -426,64 +399,7 @@ function create_chart_temp_probe(renderTo) {
 		tooltip: {
           valueSuffix: ' °C',
         }
-	  },
-	  /*
-	  {
-		name: 'Направление ветра',
-        type: 'windbarb',
-		//onSeries: 'wind-speed',
-        color: '#007F0E',
-		pointInterval: 86400000,
-        //showInLegend: false,
-		tooltip: {
-    	  pointFormatter: function() {
-			return '<span style="color:' + this.color + '">● </span>' + 'Скорость ветра: <b>' + Highcharts.numberFormat(this.value, 1) + ' м/с</b> (' + this.beaufort + ')<br/>'
-		  }
-        },
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: '#007F0E',
-            textOutline: 'none',
-            fontWeight: 'normal',
-          }
-		}
-      },
-	  */
-	  /*
-	  { 
-	    name: 'Скорость ветра',
-        type: 'line',
-		keys: ['y', 'rotation'],
-		yAxis: 2,
-        id: 'wind-speed',
-        color: '#007F0E',
-		pointInterval: 86400000,
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: '#007F0E'
-		},
-        tooltip: {
-            valueSuffix: ' м/с',
-			valueDecimals: 1,
-			pointFormatter: function() {
-			  return '<span style="color:' + this.color + '">● </span>' + 'Направление ветра: <b>' + this.rotation + '° (' + windDirLang(this.rotation) + ')</b>'
-		  }
-        },
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: '#007F0E',
-            textOutline: 'none',
-            fontWeight: 'normal',
-          },
-		  formatter: function () {
-			return Highcharts.numberFormat(this.y,1);
-		  }
-		}
-      }
-	  */
+	  }
 	],
 	xAxis: {
 	  type: 'datetime',
