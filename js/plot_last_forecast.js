@@ -238,7 +238,7 @@ function create_chart_temp(renderTo) {
 		type: 'line',
 		pointInterval: 24 * 3600 * 1000, // one day
 		yAxis: 0,
-		color: Highcharts.getOptions().colors[8],'#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
+		color: Highcharts.getOptions().colors[8],//'#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
