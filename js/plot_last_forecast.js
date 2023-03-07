@@ -77,7 +77,7 @@ function plotChart(jsonValue) {
   var year = date.getFullYear();
   document.getElementById("forecast_date").textContent = day + '-' + month + '-' + year;
   
-  create_chart_temp_old('div-chart-temperature');
+  create_chart_temp_probe('div-chart-temperature');
   create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
@@ -283,6 +283,251 @@ function create_chart_temp(renderTo) {
         tickInterval: 5,
 	  }
 	],
+	credits: {
+	  enabled: false
+	},
+	plotOptions: {
+	  spline: {
+		marker: {
+		  enable: false
+		}
+	  }
+	},
+	legend: {
+	  itemStyle: {
+	    fontWeight: 'normal'
+	  }
+    },
+	tooltip: {
+      xDateFormat: '%d-%m-%Y',
+      shared: true,
+	  crosshairs: true,
+	  //positioner: function () {
+      //  return { x: 80, y: 50 };
+      //},
+      shadow: true,
+      borderWidth: 0,
+      backgroundColor: 'rgba(255,255,255,0.8)'
+    }
+  });
+}
+
+function create_chart_temp_probe(renderTo) {
+  chartT = new Highcharts.chart(renderTo,{	
+    //chart: {
+    //  type: 'spline',
+    //  inverted: false
+	//},
+	title: {
+	  //text: "Temperature",
+	  text: 'Температура, давление, ветер'
+	  //align: 'left'
+	},
+	time: {
+	  //useUTC: false, //timezone: 'Europe/Helsinki'
+	},
+	plotOptions: {
+        series: {
+            pointInterval: 24 * 3600 * 1000 // one day
+        }
+    },
+	legend: {
+      layout: "horizontal",
+      align: "left",
+      useHTML: true,
+      maxHeight: 60,
+      labelFormatter: function () {
+        let color = hexToRgb(this.color);
+        if (!this.visible) {
+          color = { r: 204, g: 204, b: 204 };
+        }
+        var symbol = `<span class="chartSymbol" style="background: rgba(${color.r},${color.g},${color.b},0.1) 0% 0% no-repeat padding-box;border: 4px solid rgba(${color.r},${color.g},${color.b},.5);"></span>`;
+        return `${symbol} ${this.name}`;
+      },
+    },
+	series: [
+	  {
+		name: 'Давление',
+		type: 'column',
+		pointInterval: 86400000,
+		yAxis: 0,
+		tooltip: {
+            valueSuffix: ' гПа',
+        },
+		//color: '#CCCCCC',
+		color: 'rgba(0, 0, 0, 0.10)',
+		borderColor: '#000000',
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  fillColor: '#CCCCCC',
+		},
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: 'black',
+            textOutline: 'none',
+            fontWeight: 'normal',
+          },
+		},
+	  },
+	  {
+		name: 'Tmax',
+		type: 'line',
+		pointInterval: 24 * 3600 * 1000, // one day
+		yAxis: 1,
+		color: '#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  fillColor: '#FF0000'//'#FF0000',
+		},
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: '#FF0000',
+            textOutline: 'none',
+            fontWeight: 'normal'
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
+		},
+		tooltip: {
+			//valueDecimals: 2,
+			valueSuffix: ' °C'
+			// pointFormat: 'Value: {point.y:.2f} mm' // Выводит 2 знака после запятой при наведении мыши: Value: 106.40 mm
+		}
+	  },
+	  {
+		name: 'Tmin',
+		type: 'line',
+		pointInterval: 86400000,
+		yAxis: 1,
+		color: '#0000FF', //Highcharts.getOptions().colors[0], //'#0000FF',
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  fillColor: '#0000FF' //'#0000FF',
+		},
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: '#0000FF',
+            textOutline: 'none',
+            fontWeight: 'normal',
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
+		},
+		tooltip: {
+          valueSuffix: ' °C',
+        }
+	  },
+	  {
+		name: 'Направление ветра',
+        type: 'windbarb',
+		//onSeries: 'wind-speed',
+        color: '#007F0E',
+		pointInterval: 86400000,
+        //showInLegend: false,
+		tooltip: {
+    	  pointFormatter: function() {
+			return '<span style="color:' + this.color + '">● </span>' + 'Скорость ветра: <b>' + Highcharts.numberFormat(this.value, 1) + ' м/с</b> (' + this.beaufort + ')<br/>'
+		  }
+        },
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: '#007F0E',
+            textOutline: 'none',
+            fontWeight: 'normal',
+          }
+		}
+      },
+	  { 
+	    name: 'Скорость ветра',
+        type: 'line',
+		keys: ['y', 'rotation'],
+		yAxis: 2,
+        id: 'wind-speed',
+        color: '#007F0E',
+		pointInterval: 86400000,
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  fillColor: '#007F0E'
+		},
+        tooltip: {
+            valueSuffix: ' м/с',
+			valueDecimals: 1,
+			pointFormatter: function() {
+			  return '<span style="color:' + this.color + '">● </span>' + 'Направление ветра: <b>' + this.rotation + '° (' + windDirLang(this.rotation) + ')</b>'
+		  }
+        },
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: '#007F0E',
+            textOutline: 'none',
+            fontWeight: 'normal',
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
+		}
+      }
+	],
+	xAxis: {
+	  type: 'datetime',
+	  dateTimeLabelFormats: { day: '%d.%m' },
+	  gridLineWidth: 1,
+	},
+	yAxis: [
+	  { // Primary yAxis
+	    title: {
+          text: 'Давление, гПа',
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          }
+        },
+        labels: {
+          //format: '{value}°C',
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          }
+        },
+		alignTicks: true,
+        //tickInterval: 15,
+		//opposite: true,
+		visible: false,
+		
+      },
+	  {
+	    title: {
+		  text: 'Температура, °C'
+	    },
+	    alignTicks: false,
+        tickInterval: 5,
+	  },
+      {
+	    title: {
+          text: 'Скорость, м/с',
+          style: {
+            color: Highcharts.getOptions().colors[7]
+          }
+        },
+        labels: {
+          style: {
+            color: Highcharts.getOptions().colors[7]
+          }
+        },
+		min: 0,
+		alignTicks: false,
+		visible: false
+      }	  
+	 ],
 	credits: {
 	  enabled: false
 	},
