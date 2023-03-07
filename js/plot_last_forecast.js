@@ -427,6 +427,7 @@ function create_chart_temp_probe(renderTo) {
           valueSuffix: ' °C',
         }
 	  },
+	  /*
 	  {
 		name: 'Направление ветра',
         type: 'windbarb',
@@ -448,6 +449,7 @@ function create_chart_temp_probe(renderTo) {
           }
 		}
       },
+	  */
 	  { 
 	    name: 'Скорость ветра',
         type: 'line',
