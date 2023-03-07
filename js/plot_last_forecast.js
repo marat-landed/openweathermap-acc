@@ -429,7 +429,7 @@ function create_chart_humid_pop_precip(renderTo) {
 		},
 	  },
 	  {
-		name: 'Количество осадков (дождь и снег вместе)',
+		name: 'Количество осадков',
 		type: 'column',
 		yAxis: 1,
 		pointInterval: 86400000,
