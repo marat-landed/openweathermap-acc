@@ -3,6 +3,7 @@
 var chartT, // 'chart-temperature'
     chartWC, //'div-chart-weather-clouds'
 	chartHPP, // 'div-chart-humid-pop-precip'
+	chartPW, // 'div-chart-wind-press'
     chartClPr; // 'chart-clouds-precipitation'
 function plot_last_forecast(archive) {
   // Из архива всех прогнозов необходимо сформировать запись вида:
@@ -83,8 +84,8 @@ function plotChart(jsonValue) {
   create_chart_temp('div-chart-temperature'); // chartT: 'div-chart-temperature'
   create_chart_weather_clouds('div-chart-weather-clouds'); // chartWC: 'div-chart-weather-clouds'
   create_chart_humid_pop_precip('div-chart-humid-pop-precip'); // chartHPP: 'div-chart-humid-pop-precip'
-  
-  create_chart_clouds_precipitation('chart-clouds-precipitation');
+  create_chart_wind_press('div-chart-wind-press'); // chartWP: 'div-chart-wind-press'
+  //create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
   // 0: 'today_utc', 1: 'temp_max', 2: 'temp_min', 3: 'pressure', 4: 'clouds', 5: 'precipitation',
@@ -136,12 +137,12 @@ function plotChart(jsonValue) {
 		data: data //data.data
 	  })	
 	} 
-	/*else if (keys[key]=="forecast/pressure") { // pressure
-	  chartT.series[0].update({
+	else if (keys[key]=="forecast/pressure") { // pressure
+	  chartPW.series[0].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	}*/ 
+	} 
 	else if (keys[key]=="forecast/clouds") { // clouds
 	  chartWC.series[0].update({
 		pointStart: pointStart_curr,
@@ -166,18 +167,17 @@ function plotChart(jsonValue) {
 		data: data //data.data
 	  })
 	}
-	/*else if (keys[key]=="forecast/wind_speed") {
-	  chartT.series[3].update({
+	else if (keys[key]=="forecast/wind_speed") {
+	  chartWC.series[1].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
 	} else if (keys[key]=="forecast/wind_deg") {
-	  chartT.series[4].update({
+	  chartWC.series[2].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
 	}
-	*/
 	data = [];
   }
   chartT.yAxis[0].setExtremes(chartT.yAxis[0].dataMin, chartT.yAxis[0].dataMax);
@@ -540,15 +540,15 @@ function create_chart_humid_pop_precip(renderTo) {
 }
 
 // Create Temperature Chart
-function create_chart_temp_old(renderTo) {
-  chartT = new Highcharts.chart(renderTo,{	
+function create_chart_wind_press(renderTo) {
+  chartPW = new Highcharts.chart(renderTo,{	
     //chart: {
     //  type: 'spline',
     //  inverted: false
 	//},
 	title: {
 	  //text: "Temperature",
-	  text: 'Температура, давление, ветер'
+	  text: 'Давление, ветер'
 	  //align: 'left'
 	},
 	time: {
@@ -600,60 +600,6 @@ function create_chart_temp_old(renderTo) {
 		},
 	  },
 	  {
-		name: 'Tmax',
-		type: 'line',
-		pointInterval: 24 * 3600 * 1000, // one day
-		yAxis: 1,
-		color: '#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: '#FF0000'//'#FF0000',
-		},
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: '#FF0000',
-            textOutline: 'none',
-            fontWeight: 'normal'
-          },
-		  formatter: function () {
-			return Highcharts.numberFormat(this.y,1);
-		  }
-		},
-		tooltip: {
-			//valueDecimals: 2,
-			valueSuffix: ' °C'
-			// pointFormat: 'Value: {point.y:.2f} mm' // Выводит 2 знака после запятой при наведении мыши: Value: 106.40 mm
-		}
-	  },
-	  {
-		name: 'Tmin',
-		type: 'line',
-		pointInterval: 86400000,
-		yAxis: 1,
-		color: '#0000FF', //Highcharts.getOptions().colors[0], //'#0000FF',
-		marker: {
-		  symbol: 'circle',
-		  radius: 3,
-		  fillColor: '#0000FF' //'#0000FF',
-		},
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: '#0000FF',
-            textOutline: 'none',
-            fontWeight: 'normal',
-          },
-		  formatter: function () {
-			return Highcharts.numberFormat(this.y,1);
-		  }
-		},
-		tooltip: {
-          valueSuffix: ' °C',
-        }
-	  },
-	  {
 		name: 'Направление ветра',
         type: 'windbarb',
 		//onSeries: 'wind-speed',
@@ -678,7 +624,7 @@ function create_chart_temp_old(renderTo) {
 	    name: 'Скорость ветра',
         type: 'line',
 		keys: ['y', 'rotation'],
-		yAxis: 2,
+		yAxis: 1,
         id: 'wind-speed',
         color: '#007F0E',
 		pointInterval: 86400000,
@@ -732,13 +678,6 @@ function create_chart_temp_old(renderTo) {
 		visible: false,
 		
       },
-	  {
-	    title: {
-		  text: 'Температура, °C'
-	    },
-	    alignTicks: false,
-        tickInterval: 5,
-	  },
       {
 	    title: {
           text: 'Скорость, м/с',
