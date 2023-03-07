@@ -601,7 +601,7 @@ function create_chart_press_wind(renderTo) {
 		alignTicks: true,
         //tickInterval: 15,
 		//opposite: true,
-		visible: true,
+		visible: false,
       },
 	  { // 2 yAxis
 	    title: {
