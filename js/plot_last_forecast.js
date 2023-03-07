@@ -541,22 +541,24 @@ function create_chart_humid_pop_precip(renderTo) {
 // Create Temperature Chart
 function create_chart_press_wind(renderTo) {
   chartPW = new Highcharts.chart(renderTo,{	
-    //chart: {
-    //  type: 'spline',
-    //  inverted: false
-	//},
 	title: {
-	  //text: "Temperature",
 	  text: 'Давление, ветер'
-	  //align: 'left'
 	},
 	time: {
 	  //useUTC: false, //timezone: 'Europe/Helsinki'
 	},
 	plotOptions: {
-        series: {
-            pointInterval: 24 * 3600 * 1000 // one day
-        }
+      series: {
+        pointInterval: 24 * 3600 * 1000 // one day
+      },
+	  spline: {
+		marker: {
+		  enable: false
+		}
+	  },
+	  column: {
+        pointPlacement: 'on'
+      }
     },
 	legend: {
       layout: "horizontal",
@@ -571,6 +573,9 @@ function create_chart_press_wind(renderTo) {
         var symbol = `<span class="chartSymbol" style="background: rgba(${color.r},${color.g},${color.b},0.1) 0% 0% no-repeat padding-box;border: 4px solid rgba(${color.r},${color.g},${color.b},.5);"></span>`;
         return `${symbol} ${this.name}`;
       },
+	  itemStyle: {
+	    fontWeight: 'normal'
+	  }
     },
 	series: [
 	  {
@@ -697,21 +702,6 @@ function create_chart_press_wind(renderTo) {
 	credits: {
 	  enabled: false
 	},
-	plotOptions: {
-	  spline: {
-		marker: {
-		  enable: false
-		}
-	  },
-	  column: {
-        pointPlacement: 'on'
-      }
-	},
-	legend: {
-	  itemStyle: {
-	    fontWeight: 'normal'
-	  }
-    },
 	tooltip: {
       xDateFormat: '%d-%m-%Y',
       shared: true,
