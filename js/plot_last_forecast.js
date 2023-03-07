@@ -346,6 +346,7 @@ function create_chart_temp_probe(renderTo) {
       },
     },
 	series: [
+	/*
 	  {
 		name: 'Давление',
 		type: 'column',
@@ -371,6 +372,7 @@ function create_chart_temp_probe(renderTo) {
           },
 		},
 	  },
+	  */
 	  {
 		name: 'Tmax',
 		type: 'line',
