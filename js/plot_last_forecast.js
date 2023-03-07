@@ -435,6 +435,7 @@ function create_chart_temp_probe(renderTo) {
 	    alignTicks: false,
         tickInterval: 5,
 	  },
+	  /*
       {
 	    title: {
           text: 'Скорость, м/с',
@@ -450,7 +451,8 @@ function create_chart_temp_probe(renderTo) {
 		min: 0,
 		alignTicks: false,
 		visible: false
-      }	  
+      }	
+*/	  
 	 ],
 	credits: {
 	  enabled: false
