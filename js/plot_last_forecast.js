@@ -77,7 +77,7 @@ function plotChart(jsonValue) {
   var year = date.getFullYear();
   document.getElementById("forecast_date").textContent = day + '-' + month + '-' + year;
   
-  create_chart_temp_probe('div-chart-temperature');
+  create_chart_temp('div-chart-temperature');
   create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
@@ -218,7 +218,7 @@ function create_chart_temp(renderTo) {
 		name: 'Tmax',
 		type: 'line',
 		pointInterval: 24 * 3600 * 1000, // one day
-		yAxis: 1,
+		yAxis: 0,
 		color: '#FF0000',//Highcharts.getOptions().colors[3], //'#FF0000',
 		marker: {
 		  symbol: 'circle',
@@ -246,7 +246,7 @@ function create_chart_temp(renderTo) {
 		name: 'Tmin',
 		type: 'line',
 		pointInterval: 86400000,
-		yAxis: 1,
+		yAxis: 0,
 		color: '#0000FF', //Highcharts.getOptions().colors[0], //'#0000FF',
 		marker: {
 		  symbol: 'circle',
