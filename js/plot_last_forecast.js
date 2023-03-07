@@ -418,14 +418,14 @@ function create_chart_humid_pop_precip(renderTo) {
 		type: 'line',
 		yAxis: 0,
 		pointInterval: 86400000,
-		color: Highcharts.getOptions().colors[1],//'#B200FF',
+		color: Highcharts.getOptions().colors[2],//'#B200FF',
 		tooltip: {
             valueSuffix: ' %',
         },
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
-		  fillColor: Highcharts.getOptions().colors[0]//'#B200FF',
+		  fillColor: Highcharts.getOptions().colors[2]//'#B200FF',
 		},
 	  },
 	  {
