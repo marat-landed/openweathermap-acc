@@ -1,6 +1,7 @@
 // 02-05-2022 Версия для МК NodeMCU
 // 16-02-2023 Данные и LittleFS
 var chartT, // 'chart-temperature'
+    chartWC, //'div-chart-weather-clouds'
     chartClPr; // 'chart-clouds-precipitation'
 function plot_last_forecast(archive) {
   // Из архива всех прогнозов необходимо сформировать запись вида:
@@ -77,7 +78,8 @@ function plotChart(jsonValue) {
   var year = date.getFullYear();
   document.getElementById("forecast_date").textContent = day + '-' + month + '-' + year;
   
-  create_chart_temp('div-chart-temperature');
+  create_chart_temp('div-chart-temperature'); // chartT: 'div-chart-temperature'
+  create_chart_weather_clouds('div-chart-weather-clouds'); // chartWC: 'div-chart-weather-clouds'
   create_chart_clouds_precipitation('chart-clouds-precipitation');
   
   var data = [];
@@ -137,16 +139,19 @@ function plotChart(jsonValue) {
 	  })
 	}*/ 
 	else if (keys[key]=="forecast/clouds") { // clouds
-	  chartClPr.series[1].update({
+	  chartWC.series[0].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} else if (keys[key]=="forecast/precipitation") { // precipitation
+	} 
+	/*
+	else if (keys[key]=="forecast/precipitation") { // precipitation
 	  chartClPr.series[0].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
 	} 
+	*/
 	/*else if (keys[key]=="forecast/wind_speed") {
 	  chartT.series[3].update({
 		pointStart: pointStart_curr,
@@ -554,6 +559,76 @@ function create_chart_temp_old(renderTo) {
       shadow: true,
       borderWidth: 0,
       backgroundColor: 'rgba(255,255,255,0.8)'
+    }
+  });
+}
+
+// Create Weather - Clouds
+function create_chart_weather_clouds(renderTo) {
+  chartWC = new Highcharts.chart(renderTo,{	
+    chart: {
+      type: 'spline',
+      inverted: false,
+	},
+	title: {
+	  text: "Погода и облачность",
+	  //align: 'left'
+	},
+	series: [
+	  {
+		name: 'Облачность',
+		type: 'line',
+		yAxis: 0,
+		pointInterval: 86400000,
+		color: Highcharts.getOptions().colors[0],//'#B200FF',
+		tooltip: {
+            valueSuffix: ' %',
+        },
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  fillColor: Highcharts.getOptions().colors[0]//'#B200FF',
+		},
+	  },
+	],
+	xAxis: {
+	  type: 'datetime',
+	  dateTimeLabelFormats: { day: '%d.%m' },
+	  gridLineWidth: 1,
+	},
+	yAxis: [
+	  { 
+	    title: {
+          text: 'Облачность, %'
+        },
+		style: {
+            color: Highcharts.getOptions().colors[1]
+        },
+		max: 100,
+		min: 0,
+		alignTicks: false,
+        tickInterval: 20,
+      }
+	],
+	credits: {
+	  enabled: false
+	},
+	plotOptions: {
+	  spline: {
+		marker: {
+		  enable: false
+		}
+	  }
+	},
+	legend: {
+	  itemStyle: {
+	    fontWeight: 'normal'
+	  }
+    },
+	tooltip: {
+      xDateFormat: '%d-%m-%Y',
+      shared: true,
+	  crosshairs: true,
     }
   });
 }
