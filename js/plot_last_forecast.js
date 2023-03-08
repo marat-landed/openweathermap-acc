@@ -558,6 +558,9 @@ function create_chart_press_wind(renderTo) {
 	  },
 	  column: {
         pointPlacement: 'on'
+      },
+	  windbarb: {
+        pointPlacement: 'on'
       }
     },
 	legend: {
