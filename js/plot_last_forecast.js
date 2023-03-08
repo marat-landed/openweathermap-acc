@@ -678,7 +678,7 @@ function create_chart_press_wind(renderTo) {
 		name: 'Давление',
 		type: 'line',
 		pointInterval: 86400000,
-		yAxis: 0,
+		//yAxis: 0,
 		tooltip: {
           valueSuffix: ' гПа',
         },
@@ -688,7 +688,7 @@ function create_chart_press_wind(renderTo) {
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
-		  fillColor: '#CCCCCC',
+		  fillColor: Highcharts.getOptions().colors[6],
 		},
 		dataLabels: {
           enabled: true,
