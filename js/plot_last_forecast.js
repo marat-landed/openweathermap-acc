@@ -458,15 +458,13 @@ function create_chart_humid_pop_precip(renderTo) {
 	  enabled: false
 	},
 	plotOptions: {
-	  column: {
-        stacking: 'normal',
-      },
 	  spline: {
 		marker: {
 		  enable: false
 		}
 	  },
 	  column: {
+		stacking: 'normal',  
         pointPlacement: 'on'
       }
 	},
