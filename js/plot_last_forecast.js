@@ -642,7 +642,7 @@ function create_chart_press_wind(renderTo) {
             color: Highcharts.getOptions().colors[1]
           }
         },
-		min: 900,
+		//min: 900,
 		//alignTicks: true,
         //tickInterval: 15,
 		//opposite: true,
@@ -676,7 +676,7 @@ function create_chart_press_wind(renderTo) {
 	series: [
 	  {
 		name: 'Давление',
-		type: 'column',
+		//type: 'column',
 		pointInterval: 86400000,
 		//yAxis: 0,
 		tooltip: {
