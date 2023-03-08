@@ -589,9 +589,6 @@ function create_chart_press_wind(renderTo) {
 	  //useUTC: false, //timezone: 'Europe/Helsinki'
 	},
 	plotOptions: {
-      //series: {
-        //pointInterval: 24 * 3600 * 1000 // one day
-      //},
 	  spline: {
 		marker: {
 		  enable: false
@@ -645,7 +642,7 @@ function create_chart_press_wind(renderTo) {
 		//min: 900,
 		//alignTicks: true,
         //tickInterval: 15,
-		//opposite: true,
+		opposite: true,
 		visible: true,
       },
 	  { // 2 yAxis
@@ -660,7 +657,7 @@ function create_chart_press_wind(renderTo) {
             color: Highcharts.getOptions().colors[1]
           }
         },
-		min: 0,
+		//min: 0,
 		alignTicks: false,
 		visible: true
       }
@@ -678,11 +675,10 @@ function create_chart_press_wind(renderTo) {
 		name: 'Давление',
 		type: 'line',
 		pointInterval: 86400000,
-		//yAxis: 0,
+		yAxis: 0,
 		tooltip: {
           valueSuffix: ' гПа',
         },
-		//color: '#CCCCCC',
 		color: Highcharts.getOptions().colors[6],
 		//borderColor: '#000000',
 		marker: {
