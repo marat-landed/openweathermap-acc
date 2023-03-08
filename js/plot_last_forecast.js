@@ -640,7 +640,7 @@ function create_chart_press_wind(renderTo) {
           }
         },
 		//min: 900,
-		//alignTicks: true,
+		alignTicks: false,
         //tickInterval: 15,
 		opposite: true,
 		visible: true,
