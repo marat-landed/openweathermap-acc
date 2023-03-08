@@ -601,6 +601,7 @@ function create_chart_press_wind(renderTo) {
             color: Highcharts.getOptions().colors[1]
           }
         },
+		min: 900,
 		//alignTicks: true,
         //tickInterval: 15,
 		//opposite: true,
@@ -618,7 +619,7 @@ function create_chart_press_wind(renderTo) {
             color: Highcharts.getOptions().colors[1]
           }
         },
-		//min: 0,
+		min: 0,
 		alignTicks: false,
 		visible: true
       }
