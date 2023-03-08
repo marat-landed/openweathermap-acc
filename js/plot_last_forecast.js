@@ -458,7 +458,9 @@ function create_chart_humid_pop_precip(renderTo) {
 	  enabled: false
 	},
 	plotOptions: {
-	  stacking: 'normal',
+	  column: {
+        stacking: 'normal',
+      },
 	  spline: {
 		marker: {
 		  enable: false
@@ -499,7 +501,7 @@ function create_chart_humid_pop_precip(renderTo) {
 		type: 'column', //'column', 'line'
 		yAxis: 1,
 		pointInterval: 86400000,
-		color: '#68CFE8',
+		color: Highcharts.getOptions().colors[2],
 		stack: 'precipitation',
 		tooltip: {
             valueSuffix: ' мм',
@@ -508,7 +510,7 @@ function create_chart_humid_pop_precip(renderTo) {
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
-		  color: '#68CFE8',
+		  color: Highcharts.getOptions().colors[2],
 		},
 		dataLabels: {
           enabled: true,
@@ -532,7 +534,7 @@ function create_chart_humid_pop_precip(renderTo) {
 		type: 'column', //'column', 'line'
 		yAxis: 1,
 		pointInterval: 86400000,
-		color: '#68CFE8',
+		color: Highcharts.getOptions().colors[4],
 		stack: 'precipitation',
 		tooltip: {
             valueSuffix: ' мм',
@@ -541,7 +543,7 @@ function create_chart_humid_pop_precip(renderTo) {
 		marker: {
 		  symbol: 'circle',
 		  radius: 3,
-		  color: '#68CFE8',
+		  color: Highcharts.getOptions().colors[4],
 		},
 		dataLabels: {
           enabled: true,
