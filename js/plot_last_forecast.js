@@ -598,7 +598,7 @@ function create_chart_press_wind(renderTo) {
             color: Highcharts.getOptions().colors[1]
           }
         },
-		alignTicks: true,
+		//alignTicks: true,
         //tickInterval: 15,
 		//opposite: true,
 		visible: false,
