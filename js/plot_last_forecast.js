@@ -154,14 +154,20 @@ function plotChart(jsonValue) {
 		data: data //data.data
 	  })
 	}
-	else if (keys[key]=="forecast/precipitation") { // forecast/precipitation
+	else if (keys[key]=="forecast/rain") { // forecast/rain
 	  chartHPP.series[1].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} 
-	else if (keys[key]=="forecast/humidity") { // forecast/humidity
+	}
+	else if (keys[key]=="forecast/snow") { // forecast/snow
 	  chartHPP.series[2].update({
+		pointStart: pointStart_curr,
+		data: data //data.data
+	  })
+	}
+	else if (keys[key]=="forecast/humidity") { // forecast/humidity
+	  chartHPP.series[3].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
@@ -431,7 +437,7 @@ function create_chart_humid_pop_precip(renderTo) {
       },
 	  { // 2 Primary yAxis
 	    title: {
-            text: 'Осадки (дождь/снег), мм',
+            text: 'Осадки, мм',
             style: {
                 color: Highcharts.getOptions().colors[7]
             }
@@ -452,6 +458,7 @@ function create_chart_humid_pop_precip(renderTo) {
 	  enabled: false
 	},
 	plotOptions: {
+	  stacking: 'normal',
 	  spline: {
 		marker: {
 		  enable: false
@@ -488,11 +495,45 @@ function create_chart_humid_pop_precip(renderTo) {
 		},
 	  },
 	  {
-		name: 'Количество осадков',
+		name: 'Дождь',
 		type: 'column', //'column', 'line'
 		yAxis: 1,
 		pointInterval: 86400000,
 		color: '#68CFE8',
+		stack: 'precipitation',
+		tooltip: {
+            valueSuffix: ' мм',
+			//valueDecimals: 1,
+        },
+		marker: {
+		  symbol: 'circle',
+		  radius: 3,
+		  color: '#68CFE8',
+		},
+		dataLabels: {
+          enabled: true,
+          filter: {
+            operator: '>',
+            property: 'y',
+            value: 0
+          },
+          style: {
+            color: 'black',
+            textOutline: 'none',
+            fontWeight: 'normal',
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,1);
+		  }
+		}
+	  },
+	  {
+		name: 'Снег',
+		type: 'column', //'column', 'line'
+		yAxis: 1,
+		pointInterval: 86400000,
+		color: '#68CFE8',
+		stack: 'precipitation',
 		tooltip: {
             valueSuffix: ' мм',
 			//valueDecimals: 1,
