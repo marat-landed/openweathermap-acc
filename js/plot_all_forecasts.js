@@ -17,12 +17,14 @@ function plot_all_forecasts(jsonValue) {
 	
 	// Создаем интерфейсный элемент
 	var parag = document.createElement('p');
-	parag.innerText = "Архив " + keys[key];
+	//parag.style.cssText += 'font-size: 14px; padding-bottom: 10px;';
+	parag.innerText = keys[key];
 	document.getElementById('div_table_archive').appendChild(parag);
 	let table = document.createElement('table');
 	let thead = document.createElement('thead');
 	let tbody = document.createElement('tbody');
 	table.classList.add("table_arch");
+	table.style.cssText += 'padding: 10px;';
 	table.appendChild(thead);
 	table.appendChild(tbody);
 	document.getElementById('div_table_archive').appendChild(table);
