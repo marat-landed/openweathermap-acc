@@ -46,13 +46,6 @@
 		databaseURL: "https://probe-23-02-2023-default-rtdb.europe-west1.firebasedatabase.app"
       };
 	  
-	  function writeUserData(userId, name) {
-		const db = firebase.database();
-		firebase.set(firebase.ref(db, 'users1/' + userId), {
-		  username: name,
-		 });
-	  }
-
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 	  
@@ -70,12 +63,15 @@
 	  const path_name = ["temp/min", "temp/max", "pressure", "humidity", "wind_speed",
 	    "wind_deg", "clouds", "pop", "rain", "snow", "weather/icon"];
 	  const all_last_forecasts = new Object();
+	  const all_forecasts = new Object();
+	  
 	  async function get_last_forecasts() {
 	    for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
 	      var path = "forecast/" + path_name[part_name_no];
 		  await get_last_forecast_param (path).then ((value) => {
 		    //console.log(path, value[value.length-1]);
 			// Здесь вызывать функцию построения графика параметра
+			all_forecasts[path] = value; // value.length-1
 			all_last_forecasts[path] = value[0]; // value.length-1
 			//console.log(path, all_last_forecasts[path]);
 		  })
@@ -87,6 +83,7 @@
 		  //console.log(all_last_forecasts);
 		  console.log("Передаем для построения графиков");
 		  plot_last_forecast(all_last_forecasts); // Выводим последний прогноз
+		  plot_all_forecasts(all_forecasts); // Строим таблицы всех прогнозов
 		})
 	  }
 	
@@ -104,6 +101,8 @@
 		evt.currentTarget.className += " active";
 	  }
 	  
+	  //load_page('forecasts') -> prepare_last_forecasts() -> get_last_forecasts -> plot_last_forecast(all_last_forecasts)
+	  
 	  function load_page(page_name) {
 	    var xhr= new XMLHttpRequest();
 	    xhr.open('GET', 'pages/' + page_name, true);
@@ -114,35 +113,6 @@
 		  if (page_name == 'forecasts') {
 		    // Подготовка последних прогнозов и передача их для построения графиков
 			prepare_last_forecasts();
-			/*
-			  // Архив прогнозов и последний прогноз
-			  $.ajax({
-				url: "/forecast",
-				contentType: "application/json",
-				dataType : "json",
-				processData: false,
-				complete: function (data) {
-				  var archive = JSON.parse(data.responseText);
-				  plot_last_forecast(archive); // Выводим последний прогноз
-				  plot_all_forecasts(archive); // Выводим архив всех имеющихся прогнозов
-				}
-			  });
-			  // Статистика прогнозов
-			  $.ajax({
-				url: "/statistics",
-				contentType: "application/json",
-				dataType : "json",
-				processData: false,
-				complete: function (data) {
-				  // 0: {id: 45, temp_max: Array(8), temp_min: Array(8), clouds: Array(8), prob_prec: Array(8), …}
-				  var error_statistics = JSON.parse(data.responseText);
-				  //console.log(data.responseText); // {"temp_max":[23,23,23,23,23,23,23,23],"temp_min":[12,12,12,23,23,23,23,23]}
-				  //console.log("error_statistics: ",error_statistics);
-				  //console.log(last_statistics); // Object { temp_max: (8) […], temp_min: (8) […] }
-				  print_error_statistics(error_statistics); // Выводим статистику ошибок
-				}
-			  });
-			*/  
 		  } else if (page_name == 'statistics_graph_tab') {
 		    // Статистика прогнозов графики
 			$.ajax({

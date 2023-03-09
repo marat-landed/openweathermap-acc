@@ -3,6 +3,8 @@
 // 15-02-2023 Усовершенствование создания таблиц
 
 function plot_all_forecasts(jsonValue) {
+  console.log(jsonValue);
+  return;
   var keys = Object.keys(jsonValue);
   for (var key = 0; key < keys.length; key++){
 	var param = jsonValue[keys[key]];
