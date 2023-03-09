@@ -506,7 +506,7 @@ function create_chart_humid_pop_precip(renderTo) {
             fontWeight: 'normal',
           },
 		  formatter: function () {
-			return Highcharts.numberFormat(this.y,1);
+			return Highcharts.numberFormat(this.y,0);
 		  }
 		}
 	  },
@@ -589,6 +589,22 @@ function create_chart_humid_pop_precip(renderTo) {
 		  symbol: 'circle',
 		  radius: 3,
 		  fillColor: Highcharts.getOptions().colors[0]//'#B200FF',
+		},
+		dataLabels: {
+          enabled: true,
+          //filter: {
+          //  operator: '>',
+          //  property: 'y',
+          //  value: 0
+          //},
+          style: {
+            color: Highcharts.getOptions().colors[0],
+            textOutline: 'none',
+            fontWeight: 'normal',
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,0);
+		  }
 		}
 	  }
 	]
