@@ -106,15 +106,13 @@ function plotChart(jsonValue) {
 	    data.push([param[index], param1[index]]);
 	  }
 	  else if (keys[key]=="forecast/clouds") {
-		var y1 = param[index]; 
+		var y = param[index]; 
 		var weather_icon_str = param1[index];
 		var marker = {
-		  //fillColor: 'red',
-          //radius: 5,
 		  symbol: 'url(https://openweathermap.org/img/w/' + weather_icon_str + '.png)'
         };
 		var serie1 =  {
-		  y: y1,         
+		  y: y,         
 		  marker: marker
         };
 		data.push(serie1);
@@ -363,7 +361,7 @@ function create_chart_weather_clouds(renderTo) {
 		dataLabels: {
           enabled: true,
           style: {
-            color: Highcharts.getOptions().colors[0],
+            color: Highcharts.getOptions().colors[1],
             textOutline: 'none',
             fontWeight: 'normal',
           },
