@@ -141,7 +141,18 @@ function plotChart(jsonValue) {
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
-	} 
+	}
+	else if (keys[key]=="forecast/wind_speed") { // forecast/wind_speed
+	  chartPW.series[1].update({
+		pointStart: pointStart_curr,
+		data: data //data.data
+	  })
+	} else if (keys[key]=="forecast/wind_deg") { // forecast/wind_deg
+	  chartPW.series[2].update({
+		pointStart: pointStart_curr,
+		data: data //data.data
+	  })
+	}
 	else if (keys[key]=="forecast/clouds") { // clouds
 	  chartWC.series[0].update({
 		pointStart: pointStart_curr,
@@ -168,17 +179,6 @@ function plotChart(jsonValue) {
 	}
 	else if (keys[key]=="forecast/humidity") { // forecast/humidity
 	  chartHPP.series[3].update({
-		pointStart: pointStart_curr,
-		data: data //data.data
-	  })
-	}
-	else if (keys[key]=="forecast/wind_speed") {
-	  chartPW.series[1].update({
-		pointStart: pointStart_curr,
-		data: data //data.data
-	  })
-	} else if (keys[key]=="forecast/wind_deg") {
-	  chartPW.series[2].update({
 		pointStart: pointStart_curr,
 		data: data //data.data
 	  })
@@ -731,7 +731,7 @@ function create_chart_press_wind(renderTo) {
 		name: 'Направление ветра',
         type: 'windbarb',
 		//onSeries: 'wind-speed',
-        color: '#007F0E',
+        color: Highcharts.getOptions().colors[1],
 		pointInterval: 86400000,
         //showInLegend: false,
 		tooltip: {
@@ -742,7 +742,7 @@ function create_chart_press_wind(renderTo) {
 		dataLabels: {
           enabled: true,
           style: {
-            color: '#007F0E',
+            color: Highcharts.getOptions().colors[1],
             textOutline: 'none',
             fontWeight: 'normal',
           }
