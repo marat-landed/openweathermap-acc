@@ -3,13 +3,20 @@
 // 15-02-2023 Усовершенствование создания таблиц
 
 function plot_all_forecasts(jsonValue) {
-  console.log(jsonValue);
-  return;
+// "forecast/clouds": Array(8) [ "1678352400 64.00 100.00 100.00 100.00 9.00 79.00 100.00 99.00",
+// "1678352400 68.00 100.00 100.00 100.00 7.00 75.00 18.00 95.00", "1678352400 67.00 100.00 100.00 100.00 7.00 75.00 18.00 95.00", … ]
+​​// ...
+// "forecast/wind_speed": Array(8) [ "1678352400 6.85 7.24 8.12 7.38 4.09 5.14 4.51 2.59",
+// "1678352400 6.46 6.44 8.14 8.43 6.37 6.93 4.95 2.99", "1678352400 6.46 6.44 8.14 8.43 6.37 6.93 4.95 2.99", … ]
+​​	
+  //console.log(jsonValue);
+  
   var keys = Object.keys(jsonValue);
   for (var key = 0; key < keys.length; key++){
 	var param = jsonValue[keys[key]];
-	//console.log(keys[key]);
-	//console.log(param);
+	console.log("key:",keys[key]);
+	console.log("param",param);
+	continue;
 	// Создаем интерфейсный элемент
 	var parag = document.createElement('p');
 	parag.innerText = "Архив " + keys[key];
