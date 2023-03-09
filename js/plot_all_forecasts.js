@@ -37,6 +37,9 @@ function plot_all_forecasts(jsonValue) {
 	  //console.log(myArray);
 	  let row = document.createElement('tr');
 	  tbody.appendChild(row);
+	  let td = document.createElement('td');
+	  td.innerHTML = index;
+	  row.appendChild(td);
 	  myArray.forEach((element2, index2) => {
 		let td = document.createElement('td');
 		td.innerHTML = element2;
