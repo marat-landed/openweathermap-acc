@@ -14,7 +14,7 @@ function plot_all_forecasts(jsonValue) {
 	var param = jsonValue[keys[key]];
 	console.log("key:",keys[key]);
 	console.log("param",param);
-	continue;
+	
 	// Создаем интерфейсный элемент
 	var parag = document.createElement('p');
 	parag.innerText = "Архив " + keys[key];
@@ -27,7 +27,8 @@ function plot_all_forecasts(jsonValue) {
 	table.appendChild(tbody);
 	document.getElementById('div_table_archive').appendChild(table);
 	// Цикл по дням для одного параметра
-	param.slice().reverse().forEach((element, index) => {	
+	//param.slice().reverse().forEach((element, index) => {	
+	param.forEach((element, index) => {	
 	  //console.log(element);
 	  // Строку превращаем в массив: один прогноз по одному параметру (дата и 8 значений)
 	  const myArray = element.split(" ");
