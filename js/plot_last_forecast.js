@@ -659,7 +659,7 @@ function create_chart_press_wind(renderTo) {
 		alignTicks: false,
         //tickInterval: 15,
 		opposite: true,
-		visible: true,
+		visible: false,
       }
 	],
 	//credits: {
