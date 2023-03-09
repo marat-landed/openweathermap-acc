@@ -346,7 +346,7 @@ function create_chart_weather_clouds(renderTo) {
 	series: [
 	  {
 		name: 'Облачность',
-		type: 'line',
+		type: 'column',
 		yAxis: 0,
 		pointInterval: 86400000,
 		color: Highcharts.getOptions().colors[4],//'#B200FF',
