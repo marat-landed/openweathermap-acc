@@ -626,6 +626,22 @@ function create_chart_press_wind(renderTo) {
 	  gridLineWidth: 1,
 	},
 	yAxis: [
+	  { // 2 yAxis
+	    title: {
+          text: 'Скорость ветра, м/с',
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          }
+        },
+        labels: {
+          style: {
+            color: Highcharts.getOptions().colors[1]
+          }
+        },
+		//min: 0,
+		alignTicks: false,
+		visible: true
+      },
 	  { // 1 yAxis
 	    title: {
           text: 'Давление, гПа',
@@ -644,27 +660,11 @@ function create_chart_press_wind(renderTo) {
         //tickInterval: 15,
 		opposite: true,
 		visible: true,
-      },
-	  { // 2 yAxis
-	    title: {
-          text: 'Скорость ветра, м/с',
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        },
-        labels: {
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        },
-		//min: 0,
-		alignTicks: false,
-		visible: true
       }
-	 ],
-	credits: {
-	  enabled: false
-	},
+	],
+	//credits: {
+	//  enabled: false
+	//},
 	tooltip: {
       xDateFormat: '%d-%m-%Y',
       shared: true,
@@ -675,7 +675,7 @@ function create_chart_press_wind(renderTo) {
 		name: 'Давление',
 		type: 'line',
 		pointInterval: 86400000,
-		yAxis: 0,
+		yAxis: 1,
 		tooltip: {
           valueSuffix: ' гПа',
         },
@@ -695,32 +695,11 @@ function create_chart_press_wind(renderTo) {
           }
 		}
 	  },
-	  {
-		name: 'Направление ветра',
-        type: 'windbarb',
-		//onSeries: 'wind-speed',
-        color: '#007F0E',
-		pointInterval: 86400000,
-        //showInLegend: false,
-		tooltip: {
-    	  pointFormatter: function() {
-			return '<span style="color:' + this.color + '">● </span>' + 'Скорость ветра: <b>' + Highcharts.numberFormat(this.value, 1) + ' м/с</b> (' + this.beaufort + ')<br/>'
-		  }
-        },
-		dataLabels: {
-          enabled: true,
-          style: {
-            color: '#007F0E',
-            textOutline: 'none',
-            fontWeight: 'normal',
-          }
-		}
-      },
 	  { 
 	    name: 'Скорость ветра',
         type: 'line',
 		keys: ['y', 'rotation'],
-		yAxis: 1,
+		//yAxis: 1,
         id: 'wind-speed',
         color: '#007F0E',
 		pointInterval: 86400000,
@@ -746,6 +725,27 @@ function create_chart_press_wind(renderTo) {
 		  formatter: function () {
 			return Highcharts.numberFormat(this.y,1);
 		  }
+		}
+      },
+	  {
+		name: 'Направление ветра',
+        type: 'windbarb',
+		//onSeries: 'wind-speed',
+        color: '#007F0E',
+		pointInterval: 86400000,
+        //showInLegend: false,
+		tooltip: {
+    	  pointFormatter: function() {
+			return '<span style="color:' + this.color + '">● </span>' + 'Скорость ветра: <b>' + Highcharts.numberFormat(this.value, 1) + ' м/с</b> (' + this.beaufort + ')<br/>'
+		  }
+        },
+		dataLabels: {
+          enabled: true,
+          style: {
+            color: '#007F0E',
+            textOutline: 'none',
+            fontWeight: 'normal',
+          }
 		}
       }
 	]
