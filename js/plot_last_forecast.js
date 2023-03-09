@@ -362,6 +362,22 @@ function create_chart_weather_clouds(renderTo) {
 		  radius: 3,
 		  fillColor: Highcharts.getOptions().colors[0]//'#B200FF',
 		},
+		dataLabels: {
+          enabled: true,
+          //filter: {
+          //  operator: '>',
+          //  property: 'y',
+          //  value: 0
+          //},
+          style: {
+            color: Highcharts.getOptions().colors[0],
+            textOutline: 'none',
+            fontWeight: 'normal',
+          },
+		  formatter: function () {
+			return Highcharts.numberFormat(this.y,0);
+		  }
+		}
 	  },
 	],
 	xAxis: {
