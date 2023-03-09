@@ -61,7 +61,7 @@ body {font-family: Arial;}
 .highcharts-title {
     fill: #434348;
     font-weight: bold;
-    /*letter-spacing: 0.3em;*/
+    font-family: Arial;
     font-size: 14px !important;
 }
 
