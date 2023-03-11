@@ -41,7 +41,6 @@ function plot_last_forecast(archive) {
 	  if ((key==0) && (index==0)) last_forecast["today_utc"] = element;
 	  let val;
 	  if (keys[key]=="forecast/weather/icon") val = element; 
-	  else if (keys[key]=="forecast/pop") val = 100.*Number(element);
 	  else val = Number(element);
       //if ((keys[key]=="precipitation") || (keys[key]=="wind_speed")) val = val/100.;
       if (index>0) last_forecast[keys[key]].push(val);	  
