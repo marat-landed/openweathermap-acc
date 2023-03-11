@@ -71,7 +71,7 @@
 	    for (var part_name_no=0; part_name_no < path_name.length; part_name_no++) {
 	      var path = "forecast/" + path_name[part_name_no];
 		  await get_last_forecast_param (path).then ((value) => {
-		    //console.log(path, value[value.length-1]);
+		    console.log(path, value[value.length-1]);
 			// Здесь вызывать функцию построения графика параметра
 			all_forecasts[path] = value; // value.length-1
 			all_last_forecasts[path] = value[0]; // value.length-1
